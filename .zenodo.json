@@ -1,0 +1,36 @@
+{
+  "title": "Measurability of Baseball Pitching Biomechanics From a Single 2D View: code and derived tables",
+  "upload_type": "software",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Cho, Jihun",
+      "affiliation": "Department of Computer Engineering, Pai Chai University, Daejeon, Republic of Korea"
+    },
+    {
+      "name": "Go, Eun-Jun",
+      "affiliation": "Department of Computer Engineering, Pai Chai University, Daejeon, Republic of Korea"
+    },
+    {
+      "name": "Ihm, Sun-Young",
+      "affiliation": "Department of Computer Engineering, Pai Chai University, Daejeon, Republic of Korea"
+    }
+  ],
+  "description": "<p>Code, canonical tables and published figures for the paper <em>Measurability of Baseball Pitching Biomechanics From a Single 2D View</em>.</p><p>Each 3D pitch of the Driveline OpenBiomechanics Project is projected to a virtual camera swept over 24 azimuths and 7 elevations, giving 168 viewpoints. At every viewpoint a 2D estimator measures a quantity and is scored against that pitch's own 3D ground truth, after a leave-one-pitcher-out correction. The result is a graded measurability map over quantity and viewpoint: of the 42 kinematic columns evaluated, 30 reach at least one graded viewpoint and 12 reach none, and 1,151 of the 5,040 cells the retained rows span are graded.</p><p>Included are the projection, the estimators, the grading protocol, the scripts behind every table and figure of the paper, the frozen population identifiers with their checksum, and the row-by-row specification of all 42 estimators. The OpenBiomechanics recordings themselves are not redistributed; they are that project's public release and are cited rather than copied. The identifiers and checksum let the same 394 pitches by 98 pitchers be pulled from the original.</p><p>Code is released under the MIT Licence, the derived tables and figures under CC BY 4.0.</p>",
+  "keywords": [
+    "baseball pitching",
+    "sports biomechanics",
+    "human pose estimation",
+    "markerless motion capture",
+    "camera viewpoint",
+    "measurement agreement",
+    "single-view kinematics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://www.openbiomechanics.org/",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ]
+}
