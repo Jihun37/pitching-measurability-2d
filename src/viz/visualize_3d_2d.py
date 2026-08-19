@@ -7,31 +7,12 @@ import numpy as np, pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import font_manager as fm
 from matplotlib.animation import FuncAnimation, PillowWriter
 from scipy.signal import savgol_filter
 
-def _setup_korean_font():
-    names = ["Malgun Gothic","AppleGothic","NanumGothic","NanumBarunGothic",
-             "Noto Sans CJK KR","Noto Sans KR"]
-    paths = ["/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
-             "/usr/share/fonts/truetype/nanum/NanumGothic.ttf",
-             "C:/Windows/Fonts/malgun.ttf"]
-    for pth in paths:
-        if os.path.exists(pth):
-            try: fm.fontManager.addfont(pth)
-            except Exception: pass
-    have = {f.name for f in fm.fontManager.ttflist}
-    for n in names:
-        if n in have:
-            plt.rcParams["font.family"] = n
-            plt.rcParams["axes.unicode_minus"] = False
-            return True
-    plt.rcParams["axes.unicode_minus"] = False
-    return False
-
-KO = False
-def T(ko, en): return en
+# The Korean font setup and the bilingual T() helper are gone. T() always
+# returned its English argument, the setup function was never called, and the
+# labels are English now, so all it carried was a machine-specific font path.
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "stage2"))

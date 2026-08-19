@@ -12,13 +12,16 @@ Run:  conda activate diamond; cd src\\analysis; python build_overleaf_bundle.py
 import os
 import re
 import shutil
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import config
 
-PAPER = r"D:\project\diamond\paper"
+PAPER = os.path.join(config.ROOT, "paper")
 OUT = os.path.join(PAPER, "overleaf")
 TEX = "first_draft.tex"
 SEARCH = [os.path.join(PAPER, "figures"),
-          r"D:\project\diamond\data\outputs\viz",
-          r"D:\project\diamond\data\outputs\obp_validation"]
+          os.path.join(config.ROOT, "data", "outputs", "viz"),
+          config.OBP_VALIDATION_DIR]
 
 
 def main():

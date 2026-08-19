@@ -18,11 +18,14 @@ import pandas as pd, numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "stage2"))
 import metrics as M   # stage2/metrics.py
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import config
 
-DATASET_DIR  = r"D:\project\diamond\data\datasets\pitcher_motion"
+DATASET_DIR  = os.path.join(config.ROOT, "data", "datasets", "pitcher_motion")
 MOTION_CSV   = os.path.join(DATASET_DIR, "Pitcher_Motion_Data.csv")
 STATCAST_CSV = os.path.join(DATASET_DIR, "Pitcher_Motion_Data_Statcast_Companion.csv")
-OUT_DIR      = r"D:\project\diamond\data\outputs\dataset_analysis"
+OUT_DIR      = os.path.join(config.ROOT, "data", "outputs", "dataset_analysis")
 os.makedirs(OUT_DIR, exist_ok=True)
 FPS = 60
 

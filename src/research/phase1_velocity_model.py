@@ -26,8 +26,11 @@ from sklearn.pipeline import make_pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score, mean_squared_error
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import config
 
-ROOT = r"D:\project\diamond\data\datasets\OBP\openbiomechanics\baseball_pitching\data"
+ROOT = config.OBP_DATA_DIR
 META = os.path.join(ROOT, "metadata.csv")
 POI  = os.path.join(ROOT, "poi", "poi_metrics.csv")
 

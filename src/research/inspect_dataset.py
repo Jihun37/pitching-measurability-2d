@@ -7,8 +7,11 @@ Check the columns and structure of the PitcherMotion dataset.
 
 import pandas as pd
 import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import config
 
-DATASET_DIR  = r"D:\project\diamond\data\datasets\pitcher_motion"
+DATASET_DIR  = os.path.join(config.ROOT, "data", "datasets", "pitcher_motion")
 MOTION_CSV   = os.path.join(DATASET_DIR, "Pitcher_Motion_Data.csv")
 STATCAST_CSV = os.path.join(DATASET_DIR, "Pitcher_Motion_Data_Statcast_Companion.csv")
 

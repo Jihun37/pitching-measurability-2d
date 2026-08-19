@@ -16,8 +16,11 @@ Run:  conda activate diamond; cd src\\analysis; python strip_bib_notes.py
 import os
 import re
 import shutil
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import config
 
-PAPER = r"D:\project\diamond\paper"
+PAPER = os.path.join(config.ROOT, "paper")
 SRC = os.path.join(PAPER, "references.bib")
 KEEP = os.path.join(PAPER, "references_with_notes.bib")
 
