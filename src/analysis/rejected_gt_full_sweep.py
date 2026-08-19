@@ -10,7 +10,7 @@ az-only el=0 pass in rejected_gt_rescreen.py:
      candidates jumped 0.11-0.47 -> 0.88-0.99 under OBP events (ledger 2-B).
   2. NO EVENT AT ALL. Six columns are anchored at MER (max external rotation) and
      MER is a ROTATION -- 2D pose cannot locate it, so those columns were never even
-     attempted (ledger 3, "미검정, 사실상 벽"). GT ships MER_time, so for the first
+    attempted (ledger 3, "untested, effectively a wall"). GT ships MER_time, so for the first
      time we can read the 2D quantity at the correct instant and ask the projection
      question honestly.
   3. WRONG VIEW. Transverse quantities are degenerate on the ground but revive

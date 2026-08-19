@@ -1,4 +1,4 @@
-"""Figure (도 4, PATENT COPY of angle_zone_fig): 15-metric DEPLOYMENT reliability map.
+"""Figure (patent Fig. 4, PATENT COPY of angle_zone_fig): 15-metric DEPLOYMENT reliability map.
 
 Identical rendering to the paper figure (angle_zone_fig.py), but drawn for the
 DEPLOYMENT metric set and map instead of the paper's GT-clean one:

@@ -1,4 +1,4 @@
-# plot_release.py — Fig.2 (frontal release detection) 작도
+# plot_release.py -- Fig. 2, frontal release detection
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,9 +12,9 @@ t_speakpeak = 1.617
 w           = 0.200
 win_lo      = t_speakpeak - w
 
-# 스무딩: 점선(speed)은 더 강하게, 실선(ext)은 약하게
+# Smoothing: the dotted speed trace is smoothed harder than the solid extension one
 ext_s = savgol_filter(d.ext.to_numpy(), 21, 3)
-spd_s = savgol_filter(d.spd.to_numpy(), 51, 3)   # ← 윈도우 키워 매끈하게
+spd_s = savgol_filter(d.spd.to_numpy(), 51, 3)   # a wide window, for a smooth line
 
 lo, hi = win_lo - 0.05, t_speakpeak + 0.08
 m = (d.t >= lo) & (d.t <= hi)
@@ -30,14 +30,15 @@ lo_ms  = (win_lo - t_release) * 1000
 fig, ax1 = plt.subplots(figsize=(3.4, 2.5), dpi=300)
 ax2 = ax1.twinx()
 
-# ★ ax1을 ax2 위로 올리고 ax1 배경 투명화 → ax1의 텍스트가 ax2 곡선 위로
+# ax1 is raised above ax2 and its background made transparent, so ax1's text
+# reads over ax2's curves rather than under them
 ax1.set_zorder(ax2.get_zorder() + 1)
 ax1.patch.set_visible(False)
 
-# 음영은 가장 아래 (ax2에 그려 맨 뒤로)
+# The shading goes furthest back, drawn on ax2
 ax2.axvspan(lo_ms, pk_ms, color="0.90", zorder=0)
 
-# 곡선
+# the curves
 l2, = ax2.plot(tms, spd, color="0.45", lw=1.5, ls="--", label="Wrist speed", zorder=2)
 l1, = ax1.plot(tms, ext, color="black", lw=1.8, label="Arm extension", zorder=3)
 

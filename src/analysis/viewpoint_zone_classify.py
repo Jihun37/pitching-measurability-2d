@@ -1,5 +1,5 @@
 """
-Diamond - viewpoint-bin estimator + per-metric ZONE lookup (구성 B successor).
+Diamond - viewpoint-bin estimator + per-metric ZONE lookup (element B successor).
 
 The station classifier hard-codes 3 stations whose boundaries came from the
 coarse 45deg map; the el-densified 15deg sweep shows they are wrong in both

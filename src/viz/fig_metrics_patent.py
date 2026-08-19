@@ -1,4 +1,4 @@
-"""Patent-only extension of the 도6 metric-overlay panels. Adds the three metrics
+"""Patent-only extension of the patent Fig. 6 metric-overlay panels. Adds the three metrics
 that the paper Fig 3 generator (visualize_3d_2d.py) does not draw, WITHOUT
 touching that script or its PNGs:
 

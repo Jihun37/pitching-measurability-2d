@@ -1,5 +1,5 @@
 """
-Diamond — 검증 데이터 시각화 (실제 OBP 투구 1개)
+Diamond -- one real OBP pitch, drawn in 3D and in 2D projection.
 visualize_3d_2d.py
 """
 import os, sys, argparse
@@ -77,9 +77,9 @@ def draw_3d(joints, f, arm, out_png, title):
     wr = f"{arm}_wrist"
     if wr in P: ax.scatter(*P[wr], color=RED, s=55, depthshade=False)
     _set_equal_3d(ax, xs, ys, zs)
-    ax.set_xlabel(T("X (투구 방향)","X (pitch dir)"), fontsize=9, labelpad=2)
-    ax.set_ylabel(T("Y (깊이)","Y (depth)"), fontsize=9, labelpad=2)
-    ax.set_zlabel(T("Z (수직)","Z (up)"), fontsize=9, labelpad=2)
+    ax.set_xlabel("X (pitch dir)", fontsize=9, labelpad=2)
+    ax.set_ylabel("Y (depth)", fontsize=9, labelpad=2)
+    ax.set_zlabel("Z (up)", fontsize=9, labelpad=2)
     ax.set_title(title, fontsize=13, color=INK, weight="bold", pad=6)
     ax.view_init(elev=10, azim=-60)
     ax.grid(True, alpha=0.25)
@@ -114,7 +114,7 @@ def draw_3d_gif(joints, f, arm, out_gif):
         if wr in P: ax.scatter(*P[wr], color=RED, s=55, depthshade=False)
         _set_equal_3d(ax, xs, ys, zs)
         ax.set_xlabel("X", fontsize=8); ax.set_ylabel("Y", fontsize=8); ax.set_zlabel("Z", fontsize=8)
-        ax.set_title(T("3D 모션캡처 (OBP)","3D mocap (OBP)"), fontsize=12, color=INK, weight="bold")
+        ax.set_title("3D mocap (OBP)", fontsize=12, color=INK, weight="bold")
         ax.view_init(elev=10, azim=az)
         ax.grid(True, alpha=0.25)
 
@@ -270,7 +270,7 @@ def draw_2d(df, rel, fp, arm, cand, out_png, fps):
 
     ax.set_aspect("equal"); ax.invert_yaxis(); ax.axis("off")
     _fit_canvas(ax)
-    ax.set_title(T("측면(0°) 2D 투영 + 측정 지표 6종","Lateral (0\u00b0) 2D projection + 6 metrics"),
+    ax.set_title("Lateral (0\u00b0) 2D projection + 6 metrics",
                  fontsize=16, color=INK, weight="bold", pad=14)
     fig.savefig(out_png, dpi=FIG_DPI)
     plt.close(fig)
@@ -557,7 +557,7 @@ def main():
     if a.with_3d:
         name = os.path.splitext(os.path.basename(c3d))[0]
         draw_3d(joints, f, arm, os.path.join(a.out, f"{name}_3d.png"),
-                T("3D 모션캡처 (OBP)", "3D mocap (OBP)"))
+                "3D mocap (OBP)")
         draw_3d_gif(joints, f, arm, os.path.join(a.out, f"{name}_3d_rotate.gif"))
 
 

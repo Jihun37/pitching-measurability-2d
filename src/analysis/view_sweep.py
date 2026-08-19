@@ -1,10 +1,10 @@
 """
-Diamond - 뷰 스윕: 카메라 각도(azimuth) × 지표별 Level-A r²
-view_sweep.py
+View sweep: camera azimuth against per-quantity Level-A r-squared.
 
-각 c3d 를 한 번만 로드 -> 여러 azimuth 로 메모리에서 투영 -> metrics 계산
--> azimuth 별로 OBP 3D 정답과 r² -> 지표별 최고 뷰 표.
-(0°=측면, 90°=정면/포수, 사이=대각선)
+Each c3d is loaded once, projected to several azimuths in memory, and measured,
+so the r-squared against the OBP 3D truth is obtained per azimuth and the best
+view per quantity falls out. Azimuth 0 is the side, 90 the front from the
+catcher, and anything between is oblique.
 """
 import os, sys
 import numpy as np
@@ -21,9 +21,10 @@ OBP_DATA = config.OBP_DATA_DIR
 AZIMUTHS = [0, 15, 30, 45, 60, 75, 90]
 ELEV = 0.0
 
-# 우리 지표 -> OBP 3D 정답 컬럼
-#  주의: arm_slot 은 정의가 바뀌어(shoulder->hand vs 수직) OBP 의 'arm_slot'(전완 투영각)
-#        컬럼과 다르므로 여기서 제외. arm slot 검증은 armslot_validate.py 가 전담.
+# Our quantity -> the OBP 3D truth column.
+#  Note: arm_slot is excluded here. Its definition changed to shoulder-to-hand
+#        against the vertical, which is not the OBP arm_slot column, a forearm
+#        projection angle. armslot_validate.py handles that comparison.
 MAP = {
     "stride_length":       "stride_length",
     "lateral_trunk_tilt":  "torso_anterior_tilt_br",
@@ -60,10 +61,10 @@ def main():
                 pass
         done += 1
         if done % 100 == 0:
-            print(f"  ...{done} 처리")
-    print(f"처리 {done} / 실패 {fail}\n")
+            print(f"  ...{done} done")
+    print(f"done {done} / failed {fail}\n")
 
-    # az 별 r²
+    # r2 per azimuth
     table = {m: {} for m in MAP}
     for az in AZIMUTHS:
         feat = pd.DataFrame(acc[az])
@@ -74,10 +75,10 @@ def main():
             r = d[oc].corr(d[truth]) if len(d) > 2 else np.nan
             table[ours][az] = r * r if pd.notna(r) else np.nan
 
-    # 출력
+    # output
     print("=" * (16 + 8 * len(AZIMUTHS) + 14))
     hdr = "metric".ljust(20) + "".join(f"{az:>7d}°" for az in AZIMUTHS) + "   best"
-    print("[Level-A r²  by camera azimuth]   (0=측면, 90=정면)")
+    print("[Level-A r2  by camera azimuth]   (0=side, 90=front)")
     print(hdr)
     print("-" * len(hdr))
     rows = []

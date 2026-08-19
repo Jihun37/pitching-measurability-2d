@@ -1,8 +1,8 @@
 """
-Diamond - 영상 위에 그래프 오버레이 (방식 2)
-sync_overlay.py
-관절 그린 영상 위에 작은 실시간 지표 패널을 얹는다.
-config.py에서 경로를 가져온다.
+Overlay the quantities onto the video, as small live panels.
+
+The joint-overlay video with three mini plots in the corner. Paths come from
+config.py.
 """
 
 import cv2
@@ -17,17 +17,17 @@ from skeleton import load_smoothed, draw_skeleton, find_video, backbone_suffix
 
 
 def draw_mini_graph(frame, series, cur, x, y, w, h, color, label, vmin, vmax):
-    """영상 위(x,y) 위치에 작은 미니 그래프를 그린다."""
-    # 반투명 배경
+    """Draw one small plot at (x, y) over the frame."""
+    # translucent backing
     overlay = frame.copy()
     cv2.rectangle(overlay, (x, y), (x+w, y+h), (0, 0, 0), -1)
     cv2.addWeighted(overlay, 0.4, frame, 0.6, 0, frame)
 
-    # 라벨
+    # the label
     cv2.putText(frame, label, (x+5, y+18),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
 
-    # 그래프 선
+    # the trace
     n = len(series)
     pts = []
     for i in range(n):
@@ -39,11 +39,11 @@ def draw_mini_graph(frame, series, cur, x, y, w, h, color, label, vmin, vmax):
     for i in range(1, len(pts)):
         cv2.line(frame, pts[i-1], pts[i], color, 1)
 
-    # 현재 위치 점 + 세로선
+    # current position: a dot and a vertical rule
     if cur < len(pts):
         cv2.line(frame, (pts[cur][0], y+22), (pts[cur][0], y+h-3), (255,255,255), 1)
         cv2.circle(frame, pts[cur], 4, (255,255,255), -1)
-        # 현재 값 표시
+        # the current value
         cv2.putText(frame, f"{series[cur]:.0f}", (x+w-55, y+18),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255,255,255), 1)
 
@@ -72,7 +72,7 @@ def main():
 
     out = cv2.VideoWriter(out_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (width, height))
 
-    # 미니 그래프 크기·위치 (우측 상단에 세로로 3개)
+    # size and position of the mini plots: three stacked, top right
     gw, gh = 320, 90
     gx = width - gw - 20
 
@@ -84,7 +84,7 @@ def main():
 
         draw_skeleton(frame, df, frame_idx)
 
-        # 미니 그래프 3개 오버레이
+        # the three mini plots, overlaid
         draw_mini_graph(frame, wrist_spd, frame_idx, gx, 20, gw, gh,
                         (255,180,0), "Wrist speed", 0, np.nanmax(wrist_spd))
         draw_mini_graph(frame, elbow, frame_idx, gx, 120, gw, gh,
@@ -92,7 +92,7 @@ def main():
         draw_mini_graph(frame, hss, frame_idx, gx, 220, gw, gh,
                         (0,255,0), "Hip-shoulder sep", np.nanmin(hss), np.nanmax(hss))
 
-        # 릴리즈 순간 표시
+        # mark the release frame
         if frame_idx == release:
             cv2.putText(frame, "RELEASE!", (gx, 340),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
@@ -100,11 +100,11 @@ def main():
         out.write(frame)
         frame_idx += 1
         if frame_idx % 30 == 0:
-            print(f"  처리 중: {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
+            print(f"  {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
 
     cap.release()
     out.release()
-    print(f"완료! 출력: {out_path}")
+    print(f"done, written to {out_path}")
 
 
 if __name__ == "__main__":

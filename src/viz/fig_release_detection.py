@@ -1,4 +1,4 @@
-"""Figure (도3): view-dependent release detection.
+"""Figure (patent Fig. 3): view-dependent release detection.
 side  = wrist-speed argmax (ball travels in-plane).
 front = arm-extension argmax within a 200 ms window ending at the speed peak
         (the speed peak itself lands in follow-through)."""

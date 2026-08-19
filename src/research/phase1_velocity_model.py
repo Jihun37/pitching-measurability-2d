@@ -1,16 +1,20 @@
 """
-Diamond - 1단계: OBP 3D 지표로 구속 예측 '상한선' 잡기
-phase1_velocity_model.py
+Phase 1: the ceiling on predicting ball speed from 3D quantities.
 
-목적
-  - CV(영상→포즈) 단계 전에, OBP가 제공하는 '정답 품질' 3D 지표로
-    pitch_speed_mph 가 얼마나 설명되는지 측정 = 우리 파이프라인의 천장.
-  - 피처를 4그룹으로 나눠, '측면 2D로 측정 가능한 것만' 썼을 때의 R²를 따로 본다.
+Purpose
+  Before any computer vision enters, measure how much of pitch_speed_mph the
+  release's own gold-standard 3D quantities explain. That is the ceiling on the
+  whole pipeline.
+  The features are split into four groups so the R-squared reachable using only
+  what a sagittal 2D view could measure can be read separately.
 
-핵심 주의
-  - 한 투수가 여러 투구를 가짐 -> GroupKFold(by user)로 투수 누수 차단.
-    (안 그러면 R²가 '투수 암기'로 부풀려짐)
-  - max_*_velo(팔/몸통 각속도)는 구속의 '출력'이라 거의 동어반복 -> 별도 그룹.
+Two things to watch
+  A pitcher contributes several pitches, so the cross-validation is grouped by
+  user. Without that the R-squared is inflated by memorising the pitcher rather
+  than learning the mechanics.
+  max_*_velo, the arm and torso angular velocities, are an OUTPUT of throwing
+  hard and predict ball speed almost tautologically, so they are kept in their
+  own group.
 """
 import os
 import numpy as np
@@ -27,10 +31,11 @@ ROOT = r"D:\project\diamond\data\datasets\OBP\openbiomechanics\baseball_pitching
 META = os.path.join(ROOT, "metadata.csv")
 POI  = os.path.join(ROOT, "poi", "poi_metrics.csv")
 
-# ── 피처 그룹 ───────────────────────────────────────────
+# Feature groups
 ANTHRO = ["session_height_m", "session_mass_kg", "age_yrs"]
 
-# 측면 2D 시상면에서 복원 가능성이 있는 운동학(=우리의 현실 목표)
+# Kinematics with some prospect of being recovered from a sagittal 2D view,
+# which is the realistic target.
 TWO_D = [
     "stride_length", "stride_angle", "arm_slot",
     "torso_anterior_tilt_fp", "torso_anterior_tilt_br",
@@ -40,12 +45,14 @@ TWO_D = [
     "lead_knee_extension_angular_velo_max",
     "lead_knee_extension_from_fp_to_br",
 ]
-# 회전(횡단면): 측면에서도 못 잡음 -> 빼면 얼마 손해인지 확인용
+# Transverse-plane rotations: not readable from the side either, included to
+# measure what excluding them costs.
 ROTATION = [
     "rotation_hip_shoulder_separation_fp", "max_rotation_hip_shoulder_separation",
     "torso_rotation_fp", "torso_rotation_br", "pelvis_rotation_fp",
 ]
-# 출력 각속도: 구속과 거의 동어반복 -> 상한선 참고용
+# Output angular velocity: nearly tautological with ball speed, kept only to
+# mark the ceiling.
 OUTPUT_VELO = [
     "max_shoulder_internal_rotational_velo", "max_elbow_extension_velo",
     "max_torso_rotational_velo", "max_pelvis_rotational_velo",
@@ -58,14 +65,14 @@ def load():
     poi = pd.read_csv(POI)
     df = poi.merge(md[["session_pitch", "user"] + ANTHRO],
                    on="session_pitch", how="inner")
-    if TARGET + "_x" in df:  # 머지 중복 정리
+    if TARGET + "_x" in df:  # tidy up a merge duplicate
         df[TARGET] = df[TARGET + "_x"]
     df = df.dropna(subset=[TARGET, "user"])
     return df
 
 
 def evaluate(df, feats, label, model="gbm"):
-    """투수단위 GroupKFold 교차검증 R²/RMSE."""
+    """Cross-validated R2 and RMSE, GroupKFold by pitcher."""
     feats = [f for f in feats if f in df.columns]
     X = df[feats].to_numpy(float)
     y = df[TARGET].to_numpy(float)
@@ -91,7 +98,7 @@ def single_feature_corr(df):
     for f in feats:
         if f in df.columns:
             rows.append((f, df[f].corr(df[TARGET])))
-    print("\n[단일 피처 × 구속 상관 (절댓값 순)]")
+    print("\n[single feature against ball speed, by absolute correlation]")
     for f, r in sorted(rows, key=lambda t: -abs(t[1])):
         tag = ("anthro" if f in ANTHRO else "2D" if f in TWO_D else "rotation")
         print(f"  {f:42s} r={r:+.3f}   [{tag}]")
@@ -105,26 +112,26 @@ def gbm_importance(df, feats, label):
                             n_estimators=300, max_depth=3, learning_rate=0.03))
     est.fit(X, y)
     imp = est[-1].feature_importances_
-    print(f"\n[{label} - GBM 피처 중요도 상위]")
+    print(f"\n[{label} - GBM feature importance, top]")
     for f, w in sorted(zip(feats, imp), key=lambda t: -t[1])[:8]:
         print(f"  {f:42s} {w:.3f}")
 
 
 def main():
     df = load()
-    print(f"투구 {len(df)}개 / 투수 {df['user'].nunique()}명 / 구속 "
+    print(f"{len(df)} pitches / {df['user'].nunique()} pitchers / speed "
           f"{df[TARGET].mean():.1f}±{df[TARGET].std():.1f} mph "
           f"({df[TARGET].min():.0f}~{df[TARGET].max():.0f})")
 
-    print("\n[교차검증 R² / RMSE]  (투수단위 GroupKFold)")
-    evaluate(df, ANTHRO, "M0 신장·체중·나이만 (baseline)")
-    evaluate(df, ANTHRO + TWO_D, "M1 +측면2D 운동학 (현실 목표)")
-    evaluate(df, ANTHRO + TWO_D + ROTATION, "M2 +회전지표 (측면에선 불가)")
-    evaluate(df, ANTHRO + TWO_D + ROTATION + OUTPUT_VELO, "M3 +출력각속도 (동어반복 상한)")
-    evaluate(df, ANTHRO + TWO_D, "M1 (선형회귀 버전)", model="linear")
+    print("\n[cross-validated R2 / RMSE]  (GroupKFold by pitcher)")
+    evaluate(df, ANTHRO, "M0 stature, mass and age only (baseline)")
+    evaluate(df, ANTHRO + TWO_D, "M1 + sagittal 2D kinematics (realistic target)")
+    evaluate(df, ANTHRO + TWO_D + ROTATION, "M2 + rotations (not readable from the side)")
+    evaluate(df, ANTHRO + TWO_D + ROTATION + OUTPUT_VELO, "M3 + output angular velocity (tautological ceiling)")
+    evaluate(df, ANTHRO + TWO_D, "M1 (linear regression)", model="linear")
 
     single_feature_corr(df)
-    gbm_importance(df, ANTHRO + TWO_D, "M1 현실 목표")
+    gbm_importance(df, ANTHRO + TWO_D, "M1 realistic target")
 
 
 if __name__ == "__main__":

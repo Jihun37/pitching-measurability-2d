@@ -1,4 +1,4 @@
-"""Figure (도5): view- and metric-dependent EVENT / ANCHOR detection.
+"""Figure (patent Fig. 5): view- and metric-dependent EVENT / ANCHOR detection.
 
 Four signal-based detections shown on one OBP example pitch:
   (a) side   release  = wrist-speed argmax (ball travels in-plane).

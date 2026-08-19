@@ -1,10 +1,12 @@
 """
-Diamond - 스무딩 강건성: 노이즈 주입 -> smoother.smooth_coordinates -> r² 회복량
-smoothing_test.py
+Smoothing robustness: inject noise, smooth, and see how much r-squared returns.
 
-noise_sweep 은 스무딩 0(최악)이었다. 실제 영상은 시간연속이라 SG필터로 복구된다.
-측면(az=0)에서 노이즈 × 스무딩윈도우 2D 스윕으로, 신뢰 3종 r²가
-임계 노이즈(~2.8%, 4px)에서 살아나는지 본다. (OBP 360Hz 기준 윈도우 프레임)
+noise_sweep ran with no smoothing at all, which is the worst case. A real
+recording is continuous in time, so a Savitzky-Golay filter recovers part of
+what the noise cost. This sweeps noise against window width at azimuth 0 and
+asks whether the three reliable quantities survive the noise level that broke
+them there, about 2.8 per cent of stature, or 4 px. Windows are in frames at the
+OpenBiomechanics rate of 360 Hz.
 """
 import os, sys
 import numpy as np
@@ -21,7 +23,7 @@ from smoother import smooth_coordinates
 OBP_DATA = config.OBP_DATA_DIR
 AZ = 0
 NOISE_PX = [0, 2, 4, 6]              # ~0 / 1.4 / 2.8 / 4.2 % of body
-SMOOTH = [None, 7, 15, 31]          # SG 윈도우(프레임 @360Hz) / None=무보정
+SMOOTH = [None, 7, 15, 31]          # SG window in frames at 360 Hz; None means no smoothing
 SEEDS = [0, 1, 2]
 
 MAP = {
@@ -61,8 +63,8 @@ def main():
                         pass
         done += 1
         if done % 100 == 0:
-            print(f"  ...{done} 처리")
-    print(f"처리 {done} / 실패 {fail}\n")
+            print(f"  ...{done} done")
+    print(f"done {done} / failed {fail}\n")
 
     def r2(n, w, ours, truth):
         vals = []

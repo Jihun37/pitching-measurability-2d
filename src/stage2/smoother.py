@@ -1,8 +1,11 @@
-"""
-Diamond - 공통 엔진 2
-smoother.py
-MediaPipe가 뽑은 관절 좌표의 노이즈(흔들림)를 제거한다.
-SciPy의 Savitzky-Golay 필터 사용.
+"""Noise removal for extracted joint coordinates.
+
+A pose estimator returns a position per frame independently, so its output jitters even
+where the limb does not. A Savitzky-Golay filter is used rather than a moving average
+because it fits a low-order polynomial over the window and therefore preserves the peaks
+that several estimators read: an average flattens the extremum the measurement is.
+
+Projected coordinates are exact and are never smoothed. This runs on video only.
 """
 
 import numpy as np
@@ -11,24 +14,26 @@ from scipy.signal import savgol_filter
 
 
 def smooth_coordinates(df, window=7, polyorder=2, visibility_threshold=0.5):
-    """
-    모든 관절 좌표 컬럼(_x, _y)에 Savitzky-Golay 필터를 적용해 노이즈를 제거한다.
+    """Savitzky-Golay over every joint coordinate column.
 
     Parameters
     ----------
-    df                   : DataFrame   pose_extractor가 만든 좌표 데이터
-    window               : int         필터 윈도우 크기 (홀수, 클수록 부드러움)
-    polyorder            : int         다항식 차수 (보통 2)
-    visibility_threshold : float       신뢰도가 이 값 미만인 좌표는 튄 값으로 보고
-                                       NaN 처리 후 보간 (0~1)
+    df                   : DataFrame  coordinates as the extractor wrote them
+    window               : int        filter width in frames, odd; larger is smoother
+    polyorder            : int        polynomial order fitted inside the window
+    visibility_threshold : float      a coordinate whose confidence falls below this is
+                                      treated as a detection failure rather than a
+                                      position, and is interpolated instead of trusted
 
     Returns
     -------
-    smoothed : DataFrame   노이즈가 제거된 좌표 데이터
+    DataFrame with the same columns, coordinates filtered.
     """
     smoothed = df.copy()
 
-    # 1) 신뢰도(_v) 낮은 프레임의 좌표를 NaN으로 (튀는 값 제거)
+    # A low-confidence frame is not a measurement. Dropping it to NaN first means the
+    # interpolation below spans it, whereas filtering over it would drag the spike into
+    # its neighbours.
     joint_names = set(c[:-2] for c in df.columns if c.endswith("_x"))
     for joint in joint_names:
         vcol = f"{joint}_v"
@@ -37,18 +42,18 @@ def smooth_coordinates(df, window=7, polyorder=2, visibility_threshold=0.5):
             smoothed.loc[bad, f"{joint}_x"] = np.nan
             smoothed.loc[bad, f"{joint}_y"] = np.nan
 
-    # 2) _x, _y 컬럼에 필터 적용
     coord_cols = [c for c in df.columns if c.endswith("_x") or c.endswith("_y")]
 
     for col in coord_cols:
         series = smoothed[col].values
 
-        # NaN(감지 실패·저신뢰)을 선형 보간으로 채움
         if np.isnan(series).any():
             series = pd.Series(series).interpolate(
                 method="linear", limit_direction="both"
             ).values
 
+        # The window cannot exceed the series, and savgol needs it odd and wider than
+        # the polynomial. A clip too short for either is returned interpolated only.
         win = min(window, len(series) if len(series) % 2 == 1 else len(series) - 1)
         if win < polyorder + 2:
             smoothed[col] = series
@@ -60,15 +65,14 @@ def smooth_coordinates(df, window=7, polyorder=2, visibility_threshold=0.5):
 
 
 def smoothing_report(df_raw, df_smooth, joint="right_wrist"):
-    """
-    보정 전/후 흔들림(노이즈)이 얼마나 줄었는지 비교 출력.
-    """
+    """Frame-to-frame jitter before and after, as a standard deviation of the
+    first difference. A diagnostic, not a quality criterion."""
     for axis in ["x", "y"]:
         col = f"{joint}_{axis}"
-        raw_jitter    = np.nanstd(np.diff(df_raw[col].values))
+        raw_jitter = np.nanstd(np.diff(df_raw[col].values))
         smooth_jitter = np.nanstd(np.diff(df_smooth[col].values))
-        print(f"{col}: 흔들림 {raw_jitter:.2f} → {smooth_jitter:.2f} "
-              f"({(1-smooth_jitter/raw_jitter)*100:.0f}% 감소)")
+        print(f"{col}: jitter {raw_jitter:.2f} -> {smooth_jitter:.2f} "
+              f"({(1 - smooth_jitter / raw_jitter) * 100:.0f}% lower)")
 
 
 if __name__ == "__main__":
@@ -80,5 +84,5 @@ if __name__ == "__main__":
     df_smooth = smooth_coordinates(df_raw)
     df_smooth.to_csv(config.SMOOTHED_CSV, index=False)
 
-    print("노이즈 제거 완료")
+    print("smoothing done")
     smoothing_report(df_raw, df_smooth)

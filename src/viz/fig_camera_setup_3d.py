@@ -1,4 +1,4 @@
-"""Figure (도1): virtual camera setup over azimuth x elevation around the pitcher.
+"""Figure (patent Fig. 1): virtual camera setup over azimuth x elevation around the pitcher.
 Each metric is trustworthy over a REGION of the dome (a valid zone), not a single
 point; the three classic viewpoints remain as the optimal ANCHORS inside their
 zones. The shaded bands are schematic - the measured per-metric zones are Fig.2

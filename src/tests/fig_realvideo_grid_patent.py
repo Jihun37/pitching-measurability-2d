@@ -1,4 +1,4 @@
-"""Patent 도7 composite: the seven real-video metric-overlay stills tiled into ONE
+"""Patent Fig. 7 composite: the seven real-video metric-overlay stills tiled into ONE
 image (3 cols x 3 rows; the last two cells are blank). Reads PNGs already written
 by validate_overlay.py / hss_overhead_real.py (unchanged panels a,c,d) and
 fig_realvideo_new_metrics_patent.py (b without knee-velo, plus e,f,g), so it

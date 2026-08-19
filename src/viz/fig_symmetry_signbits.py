@@ -1,4 +1,4 @@
-"""Figure (도3 lower panel): 4-fold viewpoint symmetry and its sign-bit
+"""Figure (patent Fig. 3 lower panel): 4-fold viewpoint symmetry and its sign-bit
 disambiguation.
 
 The scale-free viewpoint features are blind to the pose symmetry family

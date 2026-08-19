@@ -1,4 +1,4 @@
-"""Figure (구성 H): value measurability vs repeatability.
+"""Figure (element H): value measurability vs repeatability.
 Per metric, r2 of the VALUE (2D vs 3D) beside r2 of the between-pitch SD
 (repeatability). Some metrics recover both (lead knee angle, high SNR); others
 recover the value but not its pitch-to-pitch SD (e.g. stride, low SNR).

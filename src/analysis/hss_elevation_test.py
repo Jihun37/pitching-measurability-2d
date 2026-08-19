@@ -1,7 +1,7 @@
 """
 Diamond - Keystone feasibility test:
 Does hip-shoulder separation (HSS), degenerate from any GROUND-level camera
-(r2~0, patent 구성 I), become RECOVERABLE from ELEVATED / overhead views?
+(r2~0, patent element I), become RECOVERABLE from ELEVATED / overhead views?
 
 HSS is a transverse-plane (axial rotation) quantity. At elevation=0 the pelvis
 and shoulder lines are seen edge-on -> their in-plane angle is unrecoverable.

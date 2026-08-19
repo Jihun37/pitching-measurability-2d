@@ -1,13 +1,14 @@
 """
-Diamond - 4단계 시각 검증
-validate_overlay.py
+Visual check on the measurement.
 
-이미 추출된 좌표 CSV + 원본 영상에 스켈레톤을 그리고,
-metrics.py 가 실제로 잡은 foot plant / 릴리즈 프레임과 그 순간의 측정선
-(무릎각·몸통 기울기·스트라이드)을 표시해 '측정이 맞게 잡혔나'를 눈으로 본다.
-(MediaPipe 재실행 없음 — 좌표 CSV 사용)
+Draws the skeleton onto the original clip from an already extracted coordinate
+CSV, marks the foot plant and release frames metrics.py actually found, and
+draws what is measured at those instants: the knee angle, the trunk tilt and the
+stride. It answers whether the measurement landed where it should, by eye.
 
-사용:
+The pose is not re-run; the coordinate CSV is read.
+
+Usage:
     python validate_overlay.py --coords ../../data/outputs/pitching_test/pitching_test_smoothed.csv \
                                --video  ../../data/videos/pitching_test.MOV --fps 120
 """
@@ -20,7 +21,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "viz"))
 import metrics as M
 from skeleton import square_crop
 
-# 그릴 골격 연결 (우리 표준 관절명)
+# Skeleton segments, in our joint names
 CONNECT = [
     ("left_shoulder", "right_shoulder"), ("left_hip", "right_hip"),
     ("left_shoulder", "left_hip"), ("right_shoulder", "right_hip"),
@@ -42,9 +43,9 @@ def main():
     ap.add_argument("--fps", type=float, default=config.FPS_DEFAULT)
     ap.add_argument("--arm", default=None)
     ap.add_argument("--view", default="side", choices=["side", "frontal"],
-                    help="side=측면 3종 오버레이, frontal=정면 arm slot 오버레이")
-    ap.add_argument("--release", type=int, default=None,
-                    help="릴리즈 프레임 수동 지정(공 없이 폼만 찍어 자동검출이 틀릴 때)")
+                    help="side = the three side overlays, frontal = the arm slot overlay")
+    ap.add_argument("--rel", type=int, default=None,
+                    help="set the release frame by hand, for a dry-form clip where detection has no ball to find")
     ap.add_argument("--metrics", default=None,
                     help="viewpoint-aware subset mode (deployment overlay): "
                          "comma list from knee,trunk,stride,wrist,relheight,"
@@ -105,13 +106,10 @@ def main():
         if "nose_x" in raw_df.columns and "head_x" not in raw_df.columns:
             raw_df = raw_df.rename(columns={"nose_x": "head_x", "nose_y": "head_y"})
     rel = M.release_frame(df, arm, a.fps, J, view=a.view, raw_df=raw_df)
-    # 릴리즈 수동/외부 지정 시(예: deploy의 보정 릴리즈): rel 교체 후 모든
-    # 릴리즈 종속 지표를 그 프레임 기준으로 계산 (compute_candidates rel 패스스루)
-    if a.release is not None:
-        rel = int(a.release)
-        print(f"[릴리즈 외부지정] frame{rel}")
-    fp = M.foot_plant_frame(df, lead, a.fps, J, rel)
-    # 측정값 (릴리즈 종속 지표는 정밀화/지정된 프레임에서 계산되도록 rel 전달)
+    # Where the release frame is supplied from outside, for instance the
+    # corrected release from the deployment path, it replaces the detected one
+    # and every release-anchored quantity is computed at that frame
+    # (compute_candidates passes rel straight through).
     cand = {k: v for k, (v, _) in M.compute_candidates(
         df, fps=a.fps, arm=arm, view=a.view, raw_df=raw_df, rel=rel).items()}
     print(f"arm={arm}  foot_plant=frame{fp}  release=frame{rel}")
@@ -123,7 +121,7 @@ def main():
     W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)); H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     ts = max(1.0, W / 1920.0)              # banner text scale for >1080p sources
     vfps = cap.get(cv2.CAP_PROP_FPS) or a.fps
-    vfps = round(vfps)                       # mpeg4가 119.939 같은 분수 fps 거부 -> 정수화
+    vfps = round(vfps)                       # mpeg4 refuses a fractional rate such as 119.939
     if vfps <= 0 or vfps > 1000: vfps = int(round(a.fps))
     # output base: works for both mediapipe (_smoothed.csv) and rtmp
     # (_smoothed_rtmp.csv) coords; rtmp outputs keep the _rtmp marker
@@ -139,11 +137,11 @@ def main():
     vw = None
     if not a.stills_only:
         vw = cv2.VideoWriter(out_path, cv2.VideoWriter_fourcc(*"mp4v"), vfps, (OW, OH))
-        if not vw.isOpened():                 # 코덱 폴백
+        if not vw.isOpened():                 # codec fallback
             for fourcc in ("avc1", "MJPG", "XVID"):
                 vw = cv2.VideoWriter(out_path, cv2.VideoWriter_fourcc(*fourcc), vfps, (OW, OH))
                 if vw.isOpened(): break
-    hold_frames = int(round(vfps * 1.5))   # 이벤트에서 1.5초 정지
+    hold_frames = int(round(vfps * 1.5))   # hold 1.5 s on each event
 
     # deployment report panel (--info): drawn on every OUTPUT frame at the
     # output scale (post-resize) so the text size is viewing-resolution true
@@ -189,7 +187,8 @@ def main():
     lk = ("left" if lead == "left" else "right")
 
     def _wrist_speed_vec(f):
-        """프레임 f에서 손목 순간 속도벡터(dx,dy)/초. 1프레임 차분."""
+        """Instantaneous wrist velocity (dx, dy) per second at frame f, from a
+        one-frame difference."""
         j = f"{arm}_wrist"
         f0 = max(0, f-1)
         dx = (df[f"{j}_x"].iloc[f] - df[f"{j}_x"].iloc[f0]) * a.fps
@@ -301,11 +300,11 @@ def main():
             except Exception: pass
 
     def draw_armslot_event(frame, f):
-        # 정면: 어깨->손(throwing) vs 수직 + 호 + 각
+        # frontal: shoulder->hand against the vertical, with the arc and the angle
         try:
             S = pt(df, f"{arm}_shoulder", f); Wr = pt(df, f"{arm}_wrist", f)
             vtop = (S[0], S[1] - (abs(S[1]-Wr[1]) + 40))
-            cv2.line(frame, S, vtop, WHITE, 2)                  # 수직 기준
+            cv2.line(frame, S, vtop, WHITE, 2)                  # vertical reference
             cv2.line(frame, S, Wr, YEL, 3)                      # shoulder->hand
             cv2.circle(frame, S, 7, RED, -1)
             a1 = np.degrees(np.arctan2(vtop[1]-S[1], vtop[0]-S[0]))
@@ -321,12 +320,12 @@ def main():
         ok, frame = cap.read()
         if not ok or f >= len(df):
             break
-        for j1, j2 in CONNECT:                       # 스켈레톤
+        for j1, j2 in CONNECT:                       # the skeleton
             try: cv2.line(frame, pt(df, j1, f), pt(df, j2, f), GREEN, 2)
             except Exception: pass
         if not a.square:
-            # square 모드에선 풀프레임 frame 텍스트를 생략: 크롭 영역이
-            # 좌상단을 포함하면 크롭본의 텍스트와 이중으로 겹친다
+            # In square mode the full-frame text is skipped: where the crop
+            # includes the top left, it would print twice over the crop's own.
             cv2.putText(frame, f"frame {f}", (20, int(40*ts)),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0*ts, WHITE, int(2*ts))
 
@@ -372,7 +371,7 @@ def main():
             f += 1; continue
 
         if a.view == "frontal":
-            # 정면: 릴리즈에서 arm slot 만
+            # frontal: arm slot at release only
             if f == rel:
                 draw_armslot_event(frame, f)
                 if a.square:
@@ -394,7 +393,7 @@ def main():
                 break
             f += 1; continue
 
-        # 측면(기본): 3종
+        # side view, the default: all three
         is_fp, is_rel = (f == fp), (f == rel)
         if is_fp or is_rel:
             draw_event(frame, f, is_fp, is_rel)

@@ -1,5 +1,5 @@
 """
-Figure (도7): camera-VIEWPOINT self-ID features (구성 B).
+Figure (patent Fig. 7): camera-VIEWPOINT self-ID features (element B).
 
 A single 2D pose carries the geometry needed to recover its own camera viewpoint
 on BOTH axes:
@@ -138,7 +138,7 @@ def main():
     if a.deployed:
         # FULL 360-deg orbit: the deployed estimator works on 15-deg bins all
         # around, and the ~180-deg periodicity visible here is exactly the
-        # pose symmetry the sign bits must break (lower panel of 도3).
+        # pose symmetry the sign bits must break (lower panel of patent Fig. 3).
         az_csv = bank[(bank["aug"] == 0) & (bank["el"] == 0)]
         az_feats = AZ_FEATS_DEP
         az_note = ("deployed classifier features (scale-free ratios,\n"

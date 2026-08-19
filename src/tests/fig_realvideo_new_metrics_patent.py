@@ -1,4 +1,4 @@
-"""Patent 도7 EXTENSION: the three 2026-07-24 metrics drawn on real phone video,
+"""Patent Fig. 7 EXTENSION: the three 2026-07-24 metrics drawn on real phone video,
 matching the cv2 overlay style of validate_overlay.py without touching it.
 
   (e) front  / MER      : torso lateral tilt @MER   (angle03_04, MER = release-4f)

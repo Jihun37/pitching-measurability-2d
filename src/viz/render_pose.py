@@ -1,7 +1,8 @@
 """
-Diamond - 관절 시각화 영상 생성
+Joint overlay video.
 render_pose.py
-영상에 관절·연결선·각도를 그려서 출력 영상을 만든다. (검증용)
+Draws the joints, the segments between them and the angles onto the frames and
+writes a video. A visual check, not a measurement.
 
 Renders from the cached coords CSV (backbone-agnostic) instead of running
 pose inference inline — what you see is exactly what the analysis pipeline

@@ -1,6 +1,6 @@
 """
 Diamond - Feasibility test: can a single 2D pitch video self-identify its
-camera azimuth from pose geometry alone? (patent 구성 B feasibility)
+camera azimuth from pose geometry alone? (patent element B feasibility)
 
 Each OBP c3d is projected to 7 azimuths (0..90). We extract zoom/distance-
 invariant geometric features (all normalized by the vertical torso/stature

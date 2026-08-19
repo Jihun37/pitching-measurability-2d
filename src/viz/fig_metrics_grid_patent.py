@@ -1,4 +1,4 @@
-"""Patent 도6 composite: the six metric-overlay panels tiled into ONE image.
+"""Patent Fig. 6 composite: the six metric-overlay panels tiled into ONE image.
 
 Reads the PNGs already written by visualize_3d_2d.py and fig_metrics_patent.py
 (it renders nothing itself, so the panels and the composite can never disagree)

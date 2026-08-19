@@ -1,5 +1,5 @@
 """
-Figure (도8): confidence-gated deferral makes zone measurement safe (구성 F).
+Figure (patent Fig. 8): confidence-gated deferral makes zone measurement safe (element F).
 
 Successor to the station-classifier confusion figure. The viewpoint-zone system
 decides PER METRIC from the kNN vote share (p_in = fraction of neighbours whose

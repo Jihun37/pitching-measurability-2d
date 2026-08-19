@@ -1,4 +1,4 @@
-"""Figure (patent 도5): view- and metric-dependent EVENT / ANCHOR detection.
+"""Figure (patent Fig. 5): view- and metric-dependent EVENT / ANCHOR detection.
 
 PATENT-ONLY copy of fig_event_detection.py. Identical panels (a)-(d) PLUS a
 fifth OBP panel (e) for the peak-knee-height (PKH) event that the adopted

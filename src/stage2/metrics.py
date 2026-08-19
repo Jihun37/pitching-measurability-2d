@@ -1,22 +1,33 @@
 """
-Diamond - 공유 지표 엔진 (metrics.py)
-좌표(_x,_y)만 있으면 우리 영상 / PitcherMotion 데이터셋 양쪽에서
-'똑같은 함수'로 계산되도록 설계. 이것이 교집합 검증의 핵심.
+The shared estimator engine. Every measured quantity is defined here, once.
 
-핵심 원칙 (중견수=홈플레이트 방향 뒤에서 보는 카메라):
-  - 이미지 세로(y, 위아래) / 가로(x, 좌우)  = CLEAN   (그대로 신뢰)
-  - 홈플레이트 방향(깊이, z)               = DEPTH    (단축됨, 보정 필요)
-  - 수직축 회전(골반/어깨 회전, HSS)        = DEGENERATE(정면 2D로 측정 불가 -> 제외)
+A function in this file takes a table of image coordinates and nothing else, so
+the same code reads a pitch projected from marker data and a pitch extracted from
+video. That is what makes the two comparable at all: if an estimator were
+reimplemented for either path, a disagreement between them would no longer be
+evidence about the viewpoint. Never reimplement one of these inline; import it.
 
-각 지표에 projection 신뢰등급을 붙여 반환한다.
+Each quantity carries a projection-reliability tag, which says what a single
+image plane can carry of it:
+
+  CLEAN       the quantity lies in the image plane and is read directly.
+  DEPTH       the quantity runs along the viewing axis, so it is foreshortened
+              and needs calibration onto the reference scale to mean anything.
+  DEGENERATE  the quantity is a rotation about the vertical, which a
+              ground-level camera carries no component of.
+
+That tag is a property of the geometry and is fixed per quantity. It is NOT the
+paper's grading: strong, moderate and limited are measured per (quantity,
+viewpoint) cell from agreement with the 3D truth, and live in the map, not here.
 """
 import os, sys
 import numpy as np
 from scipy.signal import medfilt as _medfilt
 from scipy.signal import savgol_filter as _savgol
 
-# ── 관절 이름 매핑 ──────────────────────────────────────
-# 우리 MediaPipe 파이프라인 기준. 데이터셋은 이 dict 만 바꾸면 동일 코드로 동작.
+# Joint names as the extractor writes them. A source that names its joints
+# differently is accommodated by passing a different dict, not by editing any
+# estimator: every function below takes J and looks its joints up through it.
 JOINTS = dict(
     l_sh="left_shoulder",  r_sh="right_shoulder",
     l_hip="left_hip",      r_hip="right_hip",
@@ -27,17 +38,17 @@ JOINTS = dict(
     head="head",
 )
 
-# 지표 신뢰등급
+# The projection-reliability tags described in the module docstring.
 CLEAN, DEPTH, DEGEN = "clean", "needs_calibration", "degenerate"
 
 
-# ── 저수준 ──────────────────────────────────────────────
+# Low-level helpers.
 def _xy(df, key, J):
     j = J[key]
     return df[f"{j}_x"].to_numpy(float), df[f"{j}_y"].to_numpy(float)
 
 def _angle(ax, ay, bx, by, cx, cy):
-    """b를 꼭짓점으로 하는 a-b-c 각도(도), 프레임별 배열."""
+    """Angle at b, in degrees, one value per frame. Unsigned, on [0, 180]."""
     v1x, v1y = ax-bx, ay-by
     v2x, v2y = cx-bx, cy-by
     dot = v1x*v2x + v1y*v2y
@@ -84,9 +95,13 @@ def _speed(x, y, fps):
     return np.concatenate([[0.0], s])
 
 
-# ── 정규화 스케일 (카메라 거리/줌 차이 흡수) ───────────────
+# Normalisation scales, which absorb camera distance and zoom.
 def body_scale_px(df, J):
-    """어깨중점-골반중점 수직거리의 중앙값(px). 길이/속도 정규화 기준."""
+    """Median vertical distance from shoulder mid to hip mid, in pixels.
+
+    The scale every length and speed is divided by, so a measurement does not
+    depend on how far the camera stood or how far it zoomed.
+    """
     lsx, lsy = _xy(df, "l_sh", J); rsx, rsy = _xy(df, "r_sh", J)
     lhx, lhy = _xy(df, "l_hip", J); rhx, rhy = _xy(df, "r_hip", J)
     torso = np.abs(((lsy+rsy)/2) - ((lhy+rhy)/2))
@@ -95,8 +110,15 @@ def body_scale_px(df, J):
 
 
 def pixel_stature(df, J):
-    """이미지상 직립 신장(px) = (가장 아래 발목 y - 머리 y)의 95퍼센타일.
-    머리관절 없으면 어깨-발목 × 1.25 근사로 폴백. 스트라이드 %height 정규화에 사용."""
+    """Standing stature in pixels: the 95th percentile of
+    (lowest ankle y - head y).
+
+    A percentile rather than the maximum, because one frame of a mis-detected
+    head would otherwise set the scale for the whole clip. Falls back to
+    shoulder-to-ankle times 1.25 where the source has no head joint. Stride is
+    reported against this, matching the release's stride_length, which is a
+    percentage of body height.
+    """
     lay = _xy(df, "l_an", J)[1]; ray = _xy(df, "r_an", J)[1]
     ankle = np.maximum(lay, ray)
     if f"{J['head']}_y" in df.columns:
@@ -359,8 +381,12 @@ def foot_plant_frame_front_speed(df, lead, fps, J, rel, tau=0.25, pkh=None,
 
 
 def foot_plant_frame(df, lead, fps, J, rel, view="side"):
-    """앞발 착지(foot plant) 프레임. 2D 기준: 앞발이 전방(x)으로 다 나간 뒤
-    수직(y) 속도가 잦아드는 순간. 못 찾으면 릴리즈 ~130ms 전으로 폴백.
+    """The frame at which the lead foot plants.
+
+    Read in the image plane: the foot has finished travelling forward in x and
+    its vertical speed has died away. Where neither is found, the fallback is
+    release minus about 130 ms, which is a plausible interval rather than a
+    detection and is reported as such.
 
     view="frontal" (or the legacy "front") routes to foot_plant_frame_front_speed
     (adopted 2026-07-26 over the y-floor foot_plant_frame_front after the
@@ -379,13 +405,14 @@ def foot_plant_frame(df, lead, fps, J, rel, view="side"):
     fwd = x[:end + 1] - x[0]
     if np.nanmax(np.abs(fwd)) < 1e-6:
         return fallback
-    if abs(np.nanmin(fwd)) > abs(np.nanmax(fwd)):   # 전방이 -x 방향이면 뒤집기
+    if abs(np.nanmin(fwd)) > abs(np.nanmax(fwd)):   # flip if forward is -x
         fwd = -fwd
     xmax = np.nanmax(fwd)
-    # 발이 지면 최저(이미지 y 최대)에 닿고 수직속도가 잦아드는 첫 프레임 = 착지
+    # Planted means both at once: the foot is at its lowest in the image and its
+    # vertical speed has fallen. Either alone fires during the stride.
     ysub = y[:end + 1]
     ylo, yhi = np.nanmin(ysub), np.nanmax(ysub)
-    ynorm = (y - ylo) / (yhi - ylo + 1e-9)          # 1에 가까울수록 지면
+    ynorm = (y - ylo) / (yhi - ylo + 1e-9)          # 1 is the ground
     vy = np.abs(np.concatenate([[0.0], np.diff(y)])) * fps
     vypk = np.nanmax(vy[:end + 1]) + 1e-9
     cand = [f for f in range(3, end)
@@ -432,12 +459,19 @@ def _quiet_end(seg, fps, thr=None, guard=None):
 
 
 def trail_anchor_x(trail_x, fp, fps, guard=None):
-    """축발(trail) 고정점 x = 동작 초기 정지구간(pre-motion quiet window)의 median.
-    축발은 러버에 고정되나 foot plant 시점엔 앞으로 딸려나오므로, fp 시점 위치가
-    아니라 '러버에 서 있던 위치'를 stride 기준점으로 써야 한다.
-    (검증: r²=0.82 @0°, /stature 정규화 = stride_pct_height 기준)
-    quiet window = 축발 |vx|가 자체 peak의 QUIET_THR을 넘어 QUIET_GUARD 프레임
-    지속되기 직전까지 (see _quiet_end). guard=1 로 호출하면 종전 정의."""
+    """Where the trail foot stood on the rubber, as an x in the image.
+
+    The median of the quiet window before motion begins, NOT the foot's position
+    at foot plant. The trail foot is anchored on the rubber during the delivery
+    but is dragged forward by the time the lead foot lands, so measuring stride
+    from its foot-plant position measures the drag as well as the stride.
+    Validated at r-squared 0.82 at azimuth 0, normalised by stature, against the
+    release's stride_length.
+
+    The quiet window ends where the trail foot's |vx| first exceeds QUIET_THR of
+    its own peak and stays there for QUIET_GUARD frames (see _quiet_end).
+    Calling with guard=1 restores the earlier definition.
+    """
     seg = trail_x[:fp + 1]
     if len(seg) < 5 or np.all(np.isnan(seg)):
         return float(np.nanmedian(seg[:5])) if len(seg) else float(trail_x[fp])
@@ -819,13 +853,17 @@ def pelvis_rot_velo_overhead(df, fps, J, conf=0.4, chord_frac=0.5,
     return _medfilt(np.abs(vel), k), occl
 
 
-# ── 후보 지표들 ─────────────────────────────────────────
+# The estimators themselves.
 def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
                        height_m=None, rel=None, az=None, el=None):
-    """한 투구(프레임 묶음) -> {지표명: (값, 신뢰등급)} dict.
-    raw_df: 실영상에서 UNSMOOTHED 좌표를 넘기면 릴리즈 프레임이 raw로
-    국소 정밀화되고(release_frame 참조), 릴리즈 종속 지표 전부가 그
-    프레임에서 계산된다. OBP 검증 경로는 raw_df 없이 호출 -> 불변.
+    """One pitch of coordinates to {quantity: (value, tag)}.
+
+    raw_df: pass UNSMOOTHED coordinates from video and the release frame is
+    refined on them locally (see release_frame), after which every
+    release-anchored quantity is read at that frame. Smoothing shifts an
+    asymmetric speed peak by a frame, which is why the raw series is wanted for
+    the instant even though the smoothed one is wanted for the value. The
+    projected path calls without raw_df and is unaffected.
     height_m: subject standing height in meters. When provided, the adopted
     wrist_speed_abs (absolute m/s) is populated; otherwise it is NaN. A
     smartphone user enters this once (tape measure, no mocap needed).
@@ -842,7 +880,7 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
     previous behaviour exactly, which is what every validation caller does."""
     J = JOINTS
     scale = body_scale_px(df, J)
-    lead = "left" if arm == "right" else "right"   # 던지는팔 반대쪽이 앞다리
+    lead = "left" if arm == "right" else "right"   # the leg opposite the throwing arm
     if rel is None:
         rel = release_frame(df, arm, fps, J, view=view, raw_df=raw_df)
     rel = int(rel)
@@ -857,14 +895,16 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
             fp_strategy = fp_view(az, el)
         except Exception:
             fp_strategy = "side"
-    fp = foot_plant_frame(df, lead, fps, J, rel, view=fp_strategy)  # 앞발 착지
+    fp = foot_plant_frame(df, lead, fps, J, rel, view=fp_strategy)
     out = {}
 
-    # 1) 릴리즈 높이: 던지는 손목 y (위로 갈수록 작음) -> 발목기준 높이로 변환, scale 정규화. CLEAN(세로축)
+    # 1) Release height: the throwing wrist's y, turned into a height above the
+    #    ankles and divided by the scale. Image y grows downward. CLEAN, it is a
+    #    vertical quantity and a side view carries it whole.
     wkey = "r_wr" if arm == "right" else "l_wr"
     wx, wy = _xy(df, wkey, J)
     lanx, lany = _xy(df, "l_an", J); ranx, rany = _xy(df, "r_an", J)
-    ground = np.nanmax(np.concatenate([lany, rany]))  # 화면상 가장 아래 발목
+    ground = np.nanmax(np.concatenate([lany, rany]))  # lowest ankle in the image
     out["release_height"] = ((ground - wy[rel]) / scale, CLEAN)
 
     # 2) Throwing-wrist peak speed (arm-speed proxy), validated vs 3D-direct
@@ -878,49 +918,58 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
     _stat0 = pixel_stature(df, J)
     wrist_abs = (wrist_pk / _stat0) * height_m if height_m else np.nan
     out["wrist_speed_abs"] = (float(wrist_abs), CLEAN)       # ADOPTED (absolute m/s)
-    out["wrist_speed"] = (wrist_pk / _stat0, CLEAN)          # 별칭 (/stature, r²=0.60)
-    out["wrist_peak_speed"] = (wrist_pk / scale, CLEAN)      # 별칭 (/scale, r²=0.38)
+    out["wrist_speed"] = (wrist_pk / _stat0, CLEAN)          # alias, /stature, r2=0.60
+    out["wrist_peak_speed"] = (wrist_pk / scale, CLEAN)      # alias, /scale, r2=0.38
 
-    # 3) 앞무릎 절대각 @릴리즈: angle(hip,knee,ankle). lead leg block 지표.
-    #    검증: 릴리즈 절대각 r²=0.94 @0° (3D direct-truth). 측면(0°) 최적, 정면서 붕괴.
-    #    절대각이 신전 '차이량'(아래 lead_knee_extension)을 크게 상회 -> 절대각이 주 지표.
+    # 3) Lead knee angle at release: angle(hip, knee, ankle). A lead-leg block
+    #    quantity. Validated at r2=0.94 at azimuth 0 against a 3D direct truth.
+    #    Best from the side, collapses from the front. The ABSOLUTE angle beats
+    #    the fp-to-release DIFFERENCE (lead_knee_extension below) by a wide
+    #    margin, which is why the absolute angle is the adopted one.
     hk = "l_hip" if lead == "left" else "r_hip"
     kk = "l_kn"  if lead == "left" else "r_kn"
     ak = "l_an"  if lead == "left" else "r_an"
     hx, hy = _xy(df, hk, J); kx, ky = _xy(df, kk, J); ax, ay = _xy(df, ak, J)
     knee = _angle(hx, hy, kx, ky, ax, ay)
-    out["lead_knee_angle"] = (float(knee[rel]), CLEAN)        # 주 지표 (절대각 @릴리즈)
-    out["lead_knee_at_release"] = (float(knee[rel]), CLEAN)   # 하위호환 별칭
+    out["lead_knee_angle"] = (float(knee[rel]), CLEAN)        # adopted: absolute angle at release
+    out["lead_knee_at_release"] = (float(knee[rel]), CLEAN)   # backwards-compatible alias
     out["lead_knee_at_fp"] = (float(knee[fp]), CLEAN)
-    out["lead_knee_extension"] = (float(knee[rel] - knee[fp]), CLEAN)  # (참고) fp->br 신전 차이량
+    out["lead_knee_extension"] = (float(knee[rel] - knee[fp]), CLEAN)  # reference: the fp->br difference
 
-    # 3b) 앞무릎 신전 각속도 @릴리즈: knee 각도의 시간미분. 검증 r²=0.65 @0° (OBP-column).
-    #     미분 지표 -> 노이즈 취약, SG 스무딩 전제. noise/smoothing robustness 재검증 대상.
+    # 3b) Lead knee extension angular velocity at release: the time derivative of
+    #     the knee angle. Validated at r2=0.65 at azimuth 0 against an OBP column.
+    #     A derivative, so it is noise-sensitive and assumes the SG smoothing is
+    #     in place.
     kvel = np.gradient(knee) * fps
     out["knee_ext_velo_br"] = (float(kvel[rel]), CLEAN)
 
-    # 4) 몸통 전후(anterior) 기울기 @릴리즈: 골반중점->어깨중점 벡터가 수직과 이루는 각.
-    #    검증: 측면 측정값이 OBP torso_anterior_tilt_br 과 r²=0.70 (lateral 컬럼과는 0.00).
-    #    -> 측면서 보이는 건 전후 기울기(forward lean). 명칭 정정: anterior. CLEAN, 0° 최적.
-    #    부호는 투구방향으로 정규화: 홈플레이트 쪽으로 숙이면 +. (화면상 -x로 던지는
-    #    좌투/반대방향 영상에서 부호가 뒤집히던 문제 수정. 방향 판정: lead ankle 이동)
+    # 4) Trunk anterior tilt at release: the angle between the hip-mid to
+    #    shoulder-mid vector and the vertical. Validated against the release's
+    #    torso_anterior_tilt_br at r2=0.70; against the LATERAL column it is 0.00,
+    #    which is what settled the naming. What a side view carries is the forward
+    #    lean, not the lateral one. CLEAN, best at azimuth 0.
+    #    The sign is normalised to the pitch direction, positive leaning towards
+    #    home, so a delivery that runs -x across the image does not come out
+    #    mirrored. The direction is read from how the lead ankle travels.
     midhx = ((_xy(df,"l_hip",J)[0]+_xy(df,"r_hip",J)[0])/2)
     midhy = (_xy(df,"l_hip",J)[1]+_xy(df,"r_hip",J)[1])/2
     midsx = (_xy(df,"l_sh",J)[0]+_xy(df,"r_sh",J)[0])/2
     midsy = (_xy(df,"l_sh",J)[1]+_xy(df,"r_sh",J)[1])/2
-    trunk_tilt = np.degrees(np.arctan2(midsx-midhx, -(midsy-midhy)))  # 수직 기준 기울기
-    _d = ax[fp] - np.nanmedian(ax[:max(3, fp // 4)])   # lead ankle 진행방향
+    trunk_tilt = np.degrees(np.arctan2(midsx-midhx, -(midsy-midhy)))  # from vertical
+    _d = ax[fp] - np.nanmedian(ax[:max(3, fp // 4)])   # which way the lead ankle went
     pitch_dir = 1.0 if _d >= 0 else -1.0
-    out["trunk_anterior_tilt"] = (float(trunk_tilt[rel]) * pitch_dir, CLEAN)  # 주 지표
-    out["lateral_trunk_tilt"] = (float(trunk_tilt[rel]) * pitch_dir, CLEAN)   # 하위호환 별칭
+    out["trunk_anterior_tilt"] = (float(trunk_tilt[rel]) * pitch_dir, CLEAN)  # adopted
+    out["lateral_trunk_tilt"] = (float(trunk_tilt[rel]) * pitch_dir, CLEAN)   # alias kept from before the renaming
 
-    # 5) arm_slot @릴리즈: shoulder->hand 벡터가 '수직'과 이루는 각 (Escamilla & Fleisig 2018).
-    #    오버핸드=작음(0~40), 쓰리쿼터=50~60, 사이드암=>70.
-    #    정면(관상면) 양 -> 정면 카메라(az~90)에서 가장 정확. 측면(0)에선 측정 불가.
+    # 5) Arm slot at release: the angle between the shoulder-to-hand vector and
+    #    the vertical (Escamilla & Fleisig 2018). Overhand is small, 0 to 40;
+    #    three-quarters 50 to 60; sidearm above 70. It is a coronal-plane
+    #    quantity, so it is most accurate from the front, near azimuth 90, and
+    #    cannot be read from a pure side view.
     skey = "r_sh" if arm == "right" else "l_sh"
     shx, shy = _xy(df, skey, J)
-    run  = abs(wx[rel] - shx[rel])          # 수평 성분
-    rise = (shy[rel] - wy[rel])             # 수직 성분(이미지 y는 아래로 +, 손이 위면 +)
+    run  = abs(wx[rel] - shx[rel])          # horizontal component
+    rise = (shy[rel] - wy[rel])             # vertical component; image y grows down, so a raised hand is positive
     arm_slot = np.degrees(np.arctan2(run, rise))
     out["arm_slot"] = (float(arm_slot), CLEAN)
 
@@ -929,14 +978,16 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
     #    /stature normalization = stride_pct_height (6b). This /body_scale
     #    output reads r2=0.59 — kept for backward compat; quote 0.82 only for
     #    stride_pct_height. Anchor recipe beats fixed-sides 0.44 / both-feet@fp.
-    lead_ax = lanx if lead == "left" else ranx          # 앞발 ankle x
-    trail_ax = ranx if lead == "left" else lanx         # 축발 ankle x
-    trail_anchor = trail_anchor_x(trail_ax, fp, fps)    # 축발 러버 고정점
+    lead_ax = lanx if lead == "left" else ranx          # lead ankle x
+    trail_ax = ranx if lead == "left" else lanx         # trail ankle x
+    trail_anchor = trail_anchor_x(trail_ax, fp, fps)    # where it stood on the rubber
     stride_px = abs(lead_ax[fp] - trail_anchor)
     out["stride_length"] = (float(stride_px / scale), CLEAN)
 
-    # 6b) 스트라이드 %height: stride_px / 픽셀신장. OBP stride_length(%body height) 정의와 일치.
-    #     신장입력·마운드 불필요(픽셀 비율이라 카메라 거리/줌 불변). 보정상수는 검증에서 적용.
+    # 6b) Stride as a percentage of height: stride_px over pixel stature, which
+    #     is how the release defines stride_length. A ratio of pixels, so it needs
+    #     neither a stature input nor a known mound and is invariant to camera
+    #     distance and zoom. Any calibration constant is applied downstream.
     #  DIVERGENCE, 2026-07-24 -- READ BEFORE TRUSTING THIS AGAINST A PAPER NUMBER.
     #  The VALIDATION path now reads the settled lead-ankle position over a
     #  release-anchored window (stride_settled_2d, r2 0.844) instead of the single
@@ -949,7 +1000,9 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
     stat = pixel_stature(df, J)
     out["stride_pct_height"] = (float(stride_px / stat), CLEAN)
 
-    # 6) (참고용) HSS 폭프록시 - 회전계열, 정면2D 한계 -> DEGENERATE 플래그
+    # 6) Hip-shoulder separation, as a width proxy only. It is a rotation about
+    #    the vertical, so a ground-level camera carries no component of it and it
+    #    is flagged DEGENERATE. The overhead estimator is hss_peak_overhead.
     lsx, lsy = _xy(df, "l_sh", J); rsx, rsy = _xy(df, "r_sh", J)
     lhx, lhy = _xy(df, "l_hip", J); rhx, rhy = _xy(df, "r_hip", J)
     sw = np.abs(rsx-lsx); hw = np.abs(rhx-lhx)
@@ -1014,7 +1067,7 @@ def compute_candidates(df, fps=60, arm="right", view="side", raw_df=None,
 
 
 if __name__ == "__main__":
-    # 합성 풀바디 1투구로 동작 검증
+    # A synthetic full-body delivery, enough to exercise every estimator.
     np.random.seed(1); N=90; cx,cy=320,240
     t=np.linspace(0,1,N)
     def col(base, x, y): 
@@ -1026,46 +1079,54 @@ if __name__ == "__main__":
     data.update(col("left_hip",  cx-25, cy+10))
     data.update(col("right_hip", cx+25, cy+10))
     data.update(col("left_knee",  cx-30, cy+70))
-    data.update(col("right_knee", cx+20+40*t, cy+70))   # 앞다리 앞으로
+    data.update(col("right_knee", cx+20+40*t, cy+70))   # lead leg travelling
     data.update(col("left_ankle",  cx-30, cy+130))
-    data.update(col("right_ankle", cx+20+80*t, cy+130)) # 스트라이드
-    wy=cy-60-40*np.sin(np.pi*t)                          # 손목 호 그리며 가속
+    data.update(col("right_ankle", cx+20+80*t, cy+130)) # the stride
+    wy=cy-60-40*np.sin(np.pi*t)                          # wrist accelerating through an arc
     data.update(col("right_wrist", cx+30+60*t, wy))
     data.update(col("left_wrist",  cx-40, cy+20))
     data.update(col("right_elbow", cx+30, cy-30)); data.update(col("left_elbow", cx-30, cy-30))
     df=pd.DataFrame(data)
     res=compute_candidates(df, fps=60, arm="right")
-    print("지표                    값        신뢰등급")
+    print("quantity                value     tag")
     print("-"*46)
     for k,(v,c) in res.items():
         print(f"{k:24s}{v:8.2f}   {c}")
 
 
-# 후보 지표 신뢰등급(정적). 분석기/UI가 import 해서 사용.
-# 주석의 r²는 OBP gold-standard 검증값(검증기준: O=OBP-column, D=3D direct-truth).
+# Static projection-reliability tag per quantity, imported by the analysers and
+# the interface. The r-squared in each note is the value measured against the
+# OpenBiomechanics gold standard; (O) means the truth was an OBP column and (D)
+# that it was computed directly on the 3D markers.
 CANDIDATE_GRADES = {
-    # ── 검증 완료 주 지표 ──
-    "lead_knee_angle":      CLEAN,   # r²=0.94 (D) @0°  무릎 절대각 @릴리즈
+    # Validated, adopted quantities.
+    "lead_knee_angle":      CLEAN,   # r2=0.94 (D) @0deg, absolute knee angle at release
     "stride_length":        CLEAN,   # r²=0.59 (O) @0°  /body_scale (compat only)
     "stride_pct_height":    CLEAN,   # r²=0.82 (O) @0°  /stature — ADOPTED headline
-    "trunk_anterior_tilt":  CLEAN,   # r²=0.70 (O) @0°  전후 기울기
-    "knee_ext_velo_br":     CLEAN,   # r²=0.65 (O) @0°  릴리즈 각속도 (스무딩 전제;
-                                     # 3D 처리 천장 0.67 == 사실상 상한, 개선 불가)
+    "trunk_anterior_tilt":  CLEAN,   # r2=0.70 (O) @0deg, forward lean
+    "knee_ext_velo_br":     CLEAN,   # r2=0.65 (O) @0deg, angular velocity at
+                                     # release, assumes the smoothing. The 3D
+                                     # ceiling is 0.67, so this is effectively the
+                                     # limit rather than an implementation gap.
     "wrist_speed_abs":      CLEAN,   # r²=0.82 (D) @0°  ABSOLUTE m/s (needs height_m)
-    "arm_slot":             CLEAN,   # 정면(90°) 최적, armslot_validate 전담
-    "release_height":       CLEAN,   # r²=0.999 (D) @0° (2026-07-03 angle_map_2d 재측정;
-                                     # 이전 0.51은 stale. ~1.0인 이유: 거의 순수 수직량이라
-                                     # 측면 투영이 무손실 + 엘리트 신장분산 작아 stature
-                                     # 정규화가 준상수 스케일. el=0에서만 유효, el>0 붕괴)
-    # ── 하위호환 별칭(값은 위와 동일/관련) ──
-    "wrist_speed":          CLEAN,   # = wrist_speed_abs 의 /stature 버전 (r²=0.60)
-    "wrist_peak_speed":     CLEAN,   # = wrist_speed 의 /scale 버전 (r²=0.38)
+    "arm_slot":             CLEAN,   # best from the front (90deg); see armslot_validate
+    "release_height":       CLEAN,   # r2=0.999 (D) @0deg, remeasured 2026-07-03
+                                     # by angle_map_2d; the earlier 0.51 is stale.
+                                     # Near 1.0 because it is almost purely
+                                     # vertical, so a side projection loses none of
+                                     # it, and elite stature varies little, so the
+                                     # stature normalisation is nearly a constant.
+                                     # Holds at el=0 only; it collapses above it.
+    # Backwards-compatible aliases; the values are the same or closely related.
+    "wrist_speed":          CLEAN,   # wrist_speed_abs divided by stature (r2=0.60)
+    "wrist_peak_speed":     CLEAN,   # wrist_speed divided by scale (r2=0.38)
     "lead_knee_at_release": CLEAN,   # = lead_knee_angle
     "lead_knee_at_fp":      CLEAN,
-    "lead_knee_extension":  CLEAN,   # (참고) fp->br 신전 차이량, r²=0.62
-    "lateral_trunk_tilt":   CLEAN,   # = trunk_anterior_tilt (명칭만 정정 전)
-    # ── 측정 불가(회전계열, 지상 카메라) ──
+    "lead_knee_extension":  CLEAN,   # reference: the fp->br difference, r2=0.62
+    "lateral_trunk_tilt":   CLEAN,   # = trunk_anterior_tilt, kept from before the renaming
+    # Not measurable from a ground-level camera: rotations about the vertical.
     "hss_width_proxy":      DEGEN,
-    # ── 오버헤드 전용 (el=85 full ring; el 60-75 부분 arc — angle_zone_table 참조) ──
+    # Overhead only. A full ring at el=85; a partial arc between el 60 and 75,
+    # for which angle_zone_table gives the extent.
     "hss_peak_overhead":    CLEAN,   # r²=0.63 (O) @el=85  signature anchor recipe
 }

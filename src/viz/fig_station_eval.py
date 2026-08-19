@@ -1,4 +1,4 @@
-"""Figure: station classifier evaluation (patent 구성 B + F).
+"""Figure: station classifier evaluation (patent element B + F).
 (a) 4-class confusion matrix (grouped CV), (b) safety tradeoff: false-accept vs
 over-caution vs confidence threshold tau. Loads the cached OBP feature table."""
 import os, sys

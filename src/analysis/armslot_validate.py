@@ -1,18 +1,20 @@
 """
-Diamond — arm slot 전용 검증 (새 정의: shoulder->hand vs 수직, Escamilla & Fleisig)
-armslot_validate.py
+Arm slot, validated on its own terms.
 
-OBP 의 arm_slot 컬럼은 '전완(forearm) 투영각'이라 우리 정의(shoulder->hand vs 수직)와 다르다.
-그래서 정답을 OBP 컬럼이 아니라 3D 좌표에서 직접 만든다:
-    3D 정면평면(Y-Z) 정답 = angle(  (hand-shoulder) 의 Y,Z 성분,  수직 Z )
-그런 다음 각 카메라 각도(azimuth)에서 우리 2D 추정을 이 정답과 대조 -> r².
-(예상: 정면 90°에서 최고, 측면 0°에서 붕괴.)
+The definition here is the shoulder-to-hand vector against the vertical
+(Escamilla & Fleisig). The release's arm_slot column is a FOREARM projection
+angle, a different quantity wearing the same name, so the truth is built directly
+from the 3D coordinates instead of taken from the column:
 
-사용:
-  # 전체 OBP (r² 표)
-  python armslot_validate.py --batch
-  # 단일 c3d 점검(추정 vs 정답)
-  python armslot_validate.py --c3d <경로.c3d>
+    truth = angle( the Y and Z components of (hand - shoulder), vertical Z )
+
+The 2D estimate at each camera azimuth is then compared against that truth,
+giving an r-squared per azimuth. It should peak at the front, near 90 degrees,
+and collapse at the side.
+
+Usage:
+  python armslot_validate.py                 # the whole release, as an r2 table
+  python armslot_validate.py --c3d <path>    # one clip, estimate against truth
 """
 import os, sys, argparse
 import numpy as np, pandas as pd
@@ -26,12 +28,14 @@ AZIMUTHS = [0, 15, 30, 45, 60, 75, 90]
 
 
 def truth_3d_frontal(joints, arm, rel):
-    """3D 정면평면 arm slot 정답: (hand-shoulder) 의 [수평=Y, 수직=Z] 로 수직과 이루는 각."""
+    """The 3D coronal-plane arm slot: the angle (hand - shoulder) makes with the
+    vertical, using its [horizontal Y, vertical Z] components.
+    """
     S = joints[f"{arm}_shoulder"][:, rel]
     W = joints[f"{arm}_wrist"][:, rel]
-    vec = W - S                       # (X,Y,Z); X=투구방향, Y=좌우, Z=수직
-    run = abs(vec[1])                 # 정면평면 수평 성분 = Y
-    rise = vec[2]                     # 수직 성분 = Z
+    vec = W - S                       # (X, Y, Z): X is the pitch direction, Y lateral, Z vertical
+    run = abs(vec[1])                 # in-plane horizontal component, Y
+    rise = vec[2]                     # vertical component, Z
     return float(np.degrees(np.arctan2(run, rise)))
 
 
@@ -71,9 +75,9 @@ def main():
 
     if a.c3d and not a.batch:
         truth, est = one(a.c3d)
-        print(f"3D 정면 정답 arm slot = {truth:.1f}deg")
-        for az in AZIMUTHS:
-            print(f"  az={az:2d}deg  2D추정 {est[az]:5.1f}  (오차 {est[az]-truth:+.1f})")
+        print(f"3D coronal truth arm slot = {truth:.1f} deg")
+        for az in sorted(est):
+            print(f"  az={az:2d}deg  2D estimate {est[az]:5.1f}  (error {est[az]-truth:+.1f})")
         return
 
     import config
@@ -92,23 +96,24 @@ def main():
             n += 1
         except Exception:
             fail += 1
-    print(f"처리 {n}개 / 실패 {fail}개\n")
-    # arm slot 정답 분포 저장 (정면 실영상 z-score 비교용)
+    print(f"done {n} / failed {fail}\n")
+    # Save the truth distribution, for the z-score comparison against real
+    # frontal video.
     try:
         import config as _cfg
         os.makedirs(_cfg.OBP_VALIDATION_DIR, exist_ok=True)
         pd.DataFrame({"arm_slot_truth": truths}).to_csv(
             os.path.join(_cfg.OBP_VALIDATION_DIR, "armslot_ref.csv"), index=False)
-        print(f"arm slot 정답 분포 저장 -> {os.path.join(_cfg.OBP_VALIDATION_DIR,'armslot_ref.csv')}"
-              f"  (평균 {np.mean(truths):.1f} / std {np.std(truths):.1f})\n")
+        print(f"arm slot truth distribution -> {os.path.join(_cfg.OBP_VALIDATION_DIR,'armslot_ref.csv')}"
+              f"  (mean {np.mean(truths):.1f} / std {np.std(truths):.1f})\n")
     except Exception as _e:
         pass
-    print(f"arm slot 정의 = shoulder->hand vs 수직 (정답=3D 정면평면)")
+    print(f"arm slot definition = shoulder->hand against the vertical (truth from the 3D coronal plane)")
     print(f"{'azimuth':>8} {'r2':>8} {'MAE':>8}")
     for az in AZIMUTHS:
         e = np.array(ests[az]); t = np.array(truths)
         print(f"{az:6d}° {r2(t,e):8.3f} {np.nanmean(np.abs(e-t)):8.1f}")
-    print("\n→ 정면(90°)에 가까울수록 r² 최고 · 측면(0°)에서 붕괴 예상")
+    print("\n-> r2 should peak near the front (90 deg) and collapse at the side (0 deg)")
 
 
 if __name__ == "__main__":

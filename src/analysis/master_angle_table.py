@@ -1,17 +1,19 @@
 """
-Diamond - 각도별 마스터 테이블 (논문용)
-master_angle_table.py
+Master table of every quantity against camera azimuth.
 
-채택된 7개 지표 + 시도했다 실패한 항목들을, 동일 프로토콜로 7개 카메라
-각도(0~90°)에서 한 번에 측정 -> r² 마스터 테이블.
-"왜 0°/90°를 채택했는가"와 "무엇을 왜 기각했는가"를 한 장으로 증명.
+The adopted quantities and the ones tried and rejected, measured under one
+protocol at seven camera azimuths from 0 to 90 degrees, giving an r-squared
+table. It is what shows on one page why 0 and 90 were adopted and what was
+rejected and why.
 
-검증 기준(혼재, 표에 표기):
-  OBP-column : poi_metrics.csv 컬럼과 비교
-  3D direct  : c3d 3D 좌표에서 정답 직접 산출
-모두 같은 azimuth 투영·같은 이벤트 검출(metrics.py) 사용.
+The truth basis is mixed and is marked per row:
+  OBP-column  compared against a column of poi_metrics.csv
+  3D direct   computed directly from the c3d 3D coordinates
+Both use the same azimuth projection and the same event detection from
+metrics.py.
 
-행 = 지표(채택/기각), 열 = azimuth. 채택 지표는 [O], 기각은 [x] 표기.
+Rows are quantities, adopted or rejected; columns are azimuths. An adopted row
+is marked [O] and a rejected one [x].
 
 Usage:
     python master_angle_table.py --limit 60
@@ -84,8 +86,8 @@ def _xy(df, j):
     return df[f"{j}_x"].to_numpy(float), df[f"{j}_y"].to_numpy(float)
 
 
-# 각 행: (라벨, 채택여부, 기준, estimator(df,az,ctx)->값, truth_key)
-# truth 는 poi 컬럼명(str) 또는 ("3d", fn) 튜플.
+# One row is (label, adopted?, truth basis, estimator(df, az, ctx) -> value,
+# truth key). The truth key is either a poi column name or a ("3d", fn) pair.
 def build_rows():
     def est_knee_abs(df, ctx):
         l = ctx["lead"]; r = ctx["rel"]
@@ -186,14 +188,14 @@ def build_rows():
         return float(np.degrees(np.arctan2(abs(v[1]), v[2])))
 
     R = []
-    # 채택 (adopted)
+    # adopted
     R.append(("Lead Knee Angle [O]", est_knee_abs, ("3d", t3_knee_abs)))
     R.append(("Stride (anchor) [O]", est_stride_anchor, "stride_length"))
     R.append(("Trunk Tilt (ant) [O]", est_trunk, "torso_anterior_tilt_br"))
     R.append(("Wrist Speed [O]", est_wrist, ("3d", t3_wrist)))
     R.append(("Arm Slot [O]", est_armslot, ("3d", t3_armslot)))
     R.append(("Release Height [O]", est_relh, ("3d", t3_relh)))
-    # 기각/대안 (rejected)
+    # rejected, or an alternative
     # Knee Ext Velo BR: DE-ADOPTED 2026-07-24. Under GT (exact) events it does not
     # clear 0.60 at ANY view (best 0.185); its detected-event score of 0.651 came
     # from reading the 2D knee-velocity curve ~11 ms before the OBP BR instant, where
@@ -221,7 +223,7 @@ def main():
     c3d_root = os.path.join(config.OBP_DATA_DIR, "c3d")
     rows = build_rows()
 
-    # 수집: per (row, az) 추정 리스트 + per row truth 리스트
+    # Collect: the estimates per (row, azimuth), and the truth per row.
     est = {(ri, az): [] for ri in range(len(rows)) for az in AZ}
     tru = {ri: [] for ri in range(len(rows))}
     done = fail = 0
@@ -275,7 +277,7 @@ def main():
         return np.corrcoef(e[m], t[m])[0, 1] ** 2
 
     print("=" * 96)
-    print("[MASTER] r² by camera azimuth   ([O]=채택, [x]=기각/대안)")
+    print("[MASTER] r2 by camera azimuth   ([O]=adopted, [x]=rejected)")
     print("=" * 96)
     hdr = f"{'metric':24s}" + "".join(f"{az:>7d}" for az in AZ) + "    best"
     print(hdr); print("-" * len(hdr))
@@ -297,7 +299,7 @@ def main():
     out = os.path.join(config.OBP_VALIDATION_DIR, "master_angle_table.csv")
     pd.DataFrame(out_rows).to_csv(out, index=False)
     print(f"\nsaved -> {out}")
-    print("\n참고: Arm Slot 노이즈 강건성·분류정확도는 armslot_robust_test.py (별표).")
+    print("\nNote: arm slot noise robustness and classification accuracy are in armslot_robust_test.py.")
 
 
 if __name__ == "__main__":

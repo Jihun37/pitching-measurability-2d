@@ -1,8 +1,9 @@
 """
-Diamond - 공통 엔진 1
-pose_extractor.py
-영상에서 MediaPipe로 관절 좌표를 추출한다.
-모든 드릴이 공통으로 사용하는 첫 단계.
+Joint extraction from video, with MediaPipe.
+
+The first stage of the video path. RTMPose in stage1/rtmp_extractor.py is the
+official backbone; this one is kept as the legacy alternative and writes the same
+CSV schema.
 """
 
 import cv2
@@ -14,7 +15,7 @@ from mediapipe.tasks.python import vision
 from mediapipe.tasks.python.vision import PoseLandmarkerOptions, RunningMode
 
 
-# ── 관절 인덱스 정의 ────────────────────────────────────
+# Joint indices as MediaPipe numbers them.
 JOINTS = {
     "nose":           0,
     "left_shoulder":  11,
@@ -36,18 +37,18 @@ JOINTS = {
 
 def extract_pose(video_path, model_path, save_csv=None):
     """
-    영상에서 프레임별 관절 좌표를 추출한다.
+    Extract per-frame joint coordinates from a clip.
 
     Parameters
     ----------
-    video_path : str   분석할 영상 경로
-    model_path : str   MediaPipe pose_landmarker.task 경로
-    save_csv   : str   결과를 저장할 CSV 경로 (None이면 저장 안 함)
+    video_path : str   the clip to read
+    model_path : str   MediaPipe pose_landmarker.task
+    save_csv   : str   where to write the result; None writes nothing
 
     Returns
     -------
-    df   : DataFrame   프레임별 관절 좌표 (픽셀 단위)
-    meta : dict        영상 정보 (fps, width, height, total_frames)
+    df   : DataFrame   joint coordinates per frame, in pixels
+    meta : dict        fps, width, height, total_frames
     """
     base_options = python.BaseOptions(model_asset_path=model_path)
     options = PoseLandmarkerOptions(
@@ -61,7 +62,7 @@ def extract_pose(video_path, model_path, save_csv=None):
 
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        raise IOError(f"영상을 열 수 없습니다: {video_path}")
+        raise IOError(f"cannot open the clip: {video_path}")
 
     fps    = cap.get(cv2.CAP_PROP_FPS)
     width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -69,7 +70,7 @@ def extract_pose(video_path, model_path, save_csv=None):
     total  = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     meta = {"fps": fps, "width": width, "height": height, "total_frames": total}
-    print(f"영상 정보: {width}x{height}, {fps:.1f}fps, 총 {total}프레임")
+    print(f"clip: {width}x{height}, {fps:.1f} fps, {total} frames")
 
     rows = []
     frame_idx = 0
@@ -95,9 +96,9 @@ def extract_pose(video_path, model_path, save_csv=None):
                 for name, idx in JOINTS.items():
                     row[f"{name}_x"] = lm[idx].x * width
                     row[f"{name}_y"] = lm[idx].y * height
-                    row[f"{name}_v"] = lm[idx].visibility   # 신뢰도
+                    row[f"{name}_v"] = lm[idx].visibility   # confidence
             else:
-                # 감지 실패 시 NaN
+                # NaN where the detector found nothing
                 for name in JOINTS:
                     row[f"{name}_x"] = np.nan
                     row[f"{name}_y"] = np.nan
@@ -107,22 +108,22 @@ def extract_pose(video_path, model_path, save_csv=None):
             frame_idx += 1
 
             if frame_idx % 30 == 0:
-                print(f"  처리 중: {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
+                print(f"  {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
 
     cap.release()
 
     df = pd.DataFrame(rows)
-    print(f"관절 감지 성공: {detected}/{total} 프레임 ({detected/total*100:.1f}%)")
+    print(f"joints detected in {detected}/{total} frames ({detected/total*100:.1f}%)")
 
     if save_csv:
         df.to_csv(save_csv, index=False)
-        print(f"CSV 저장 완료: {save_csv}")
+        print(f"csv written: {save_csv}")
 
     return df, meta
 
 
 if __name__ == "__main__":
-    # config.py에서 경로를 가져온다 (src 폴더 기준)
+    # paths come from config.py, one level up in src/
     import sys, os
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
     import config

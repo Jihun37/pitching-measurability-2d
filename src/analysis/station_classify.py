@@ -1,5 +1,5 @@
 """
-Diamond - Viewpoint STATION classifier (patent 구성 B + F).
+Diamond - Viewpoint STATION classifier (patent element B + F).
 
 NOTE (2026-07-10): kept as the OFFICIAL §10.3 artifact (paper numbers quote
 from PAPER_REVISION_HANDOFF §10.3 only). The station framing itself is
@@ -13,7 +13,7 @@ unlock metrics; everything else is a dead zone. So classify a pitch video into:
   side     : az<=30, el<=30   -> 6 sagittal metrics
   front    : az>=70, el<=30   -> arm slot
   overhead : el>=80           -> hip-shoulder separation
-  reject   : dead zone        -> trigger re-shoot guidance (구성 F)
+  reject   : dead zone        -> trigger re-shoot guidance (element F)
 Station tolerances follow the r2>=0.6 usable regions of angle_map_2d.
 
 Features are event-free, dimensionless RATIOS (zoom/distance-invariant) taken
@@ -259,7 +259,7 @@ def main():
 
     # confidence threshold: 'when unsure, re-shoot'. Defer to reject if the
     # winning vote share < tau. Trades over-caution for safety (fewer garbage
-    # outputs). Shows the deployable tradeoff for 구성 F.
+    # outputs). Shows the deployable tradeoff for element F.
     print("\n[confidence threshold]  predict usable only if vote share >= tau")
     print(f"{'tau':>6}{'acc':>8}{'false-accept':>15}{'over-caution':>15}")
     for tau in [0.0, 0.60, 0.72, 0.84, 0.92]:

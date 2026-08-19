@@ -1,13 +1,17 @@
 """
-Diamond - match_analyze.py  (수정판)
-변경점:
-  (1) shoulder/hip 의 .max() 포화 지표 제거
-  (2) HSS 선분각 단일지표 -> 후보군 전체(metrics.compute_candidates)로 확장
-  (3) 좌표에서 직접 계산 -> 우리 영상과 '같은 함수'로 검증 (교집합)
-  (4) 모든 후보 × release_speed 상관을 한 표로 랭킹
+Candidate quantities against release speed, on an external dataset.
 
-※ 데이터셋 좌표 컬럼명이 우리와 다르면 아래 DATASET_JOINTS 만 채우면 됨.
-   (inspect_dataset.py 의 컬럼 리스트로 매핑)
+Revised from the first version in four ways:
+  1. the saturating shoulder and hip .max() quantities are dropped;
+  2. hip-shoulder separation as a single segment angle is replaced by the whole
+     candidate set from metrics.compute_candidates;
+  3. the quantities are computed by the SAME functions our own clips go through,
+     rather than reimplemented from the coordinates here, which is what makes the
+     comparison mean anything;
+  4. every candidate is correlated against release_speed and ranked in one table.
+
+Where the dataset names its coordinate columns differently, only DATASET_JOINTS
+below needs filling, from the column list inspect_dataset.py prints.
 """
 import os, sys
 import pandas as pd, numpy as np
@@ -22,9 +26,10 @@ OUT_DIR      = r"D:\project\diamond\data\outputs\dataset_analysis"
 os.makedirs(OUT_DIR, exist_ok=True)
 FPS = 60
 
-# 데이터셋 컬럼명 -> 우리 표준 이름. inspect_dataset.py 결과로 채울 것.
-# 예시(데이터셋이 'shoulder_L_x' 식이면): {"left_shoulder":"shoulder_L", ...}
-DATASET_JOINTS = None   # None 이면 metrics.JOINTS(우리 이름) 그대로 사용
+# Dataset column names -> our standard names. Fill from what inspect_dataset.py
+# reports. For a dataset naming joints "shoulder_L_x", that is
+# {"left_shoulder": "shoulder_L", ...}.
+DATASET_JOINTS = None   # None uses metrics.JOINTS unchanged
 
 def main():
     print("Loading motion data...")
@@ -33,7 +38,7 @@ def main():
         motion = motion[(motion.no_missing_frames==1) & (motion.smooth_CoM_flag==1)]
     print(f"  rows after filter: {len(motion):,}")
 
-    if DATASET_JOINTS:                      # 컬럼명이 다르면 rename
+    if DATASET_JOINTS:                      # rename where the columns differ
         ren = {}
         for std, ds in DATASET_JOINTS.items():
             ren[f"{ds}_x"] = f"{std}_x"; ren[f"{ds}_y"] = f"{std}_y"
@@ -50,7 +55,7 @@ def main():
         try:
             c = M.compute_candidates(g, fps=FPS, arm=arm)
         except KeyError:
-            continue   # 필요한 관절 컬럼이 없는 투구는 건너뜀
+            continue   # a pitch missing a joint column is skipped
         row = {"pitcher":pid, "pitch_type":ptype, "pitch_id":pno, "n_frames":len(g)}
         for name,(val,_) in c.items(): row[name] = val
         rows.append(row)

@@ -1,14 +1,14 @@
 """
-Diamond - 영상 + 그래프 나란히 합성 (방식 1)
-sync_sidebyside.py
-왼쪽: 관절 그린 영상 / 오른쪽: 3개 그래프 (현재 프레임 위치 표시)
-config.py에서 경로를 가져온다.
+Video and plots side by side.
+
+The joint-overlay video on the left, three plots on the right with the current
+frame marked. Paths come from config.py.
 """
 
 import cv2
 import numpy as np
 import matplotlib
-matplotlib.use("Agg")   # 화면 없이 그림만 생성
+matplotlib.use("Agg")   # render without a display
 import matplotlib.pyplot as plt
 import os, sys, argparse
 
@@ -20,7 +20,7 @@ from skeleton import load_smoothed, draw_skeleton, find_video, backbone_suffix
 
 
 def make_graph_frame(elbow, wrist_spd, hss, cur_frame, release, start, h_px):
-    """현재 프레임 위치 세로선이 그려진 그래프 이미지를 numpy 배열로 반환."""
+    """The plots as a numpy array, with a rule at the current frame."""
     fig, axes = plt.subplots(3, 1, figsize=(6, h_px/100), sharex=True, dpi=100)
 
     axes[0].plot(wrist_spd, color="tab:blue")
@@ -37,7 +37,7 @@ def make_graph_frame(elbow, wrist_spd, hss, cur_frame, release, start, h_px):
     axes[2].set_ylabel("Hip-sh sep")
     axes[2].set_xlabel("Frame")
 
-    # 현재 프레임 위치 (검은 굵은 세로선)
+    # the current frame, as a heavy black rule
     for ax in axes:
         ax.axvline(cur_frame, color="black", lw=2, alpha=0.7)
         ax.grid(alpha=0.3)
@@ -58,7 +58,8 @@ def main():
     a = ap.parse_args()
     name = a.video or config.VIDEO_NAME
 
-    # 1) 보정된 좌표 불러오기 + 지표 계산 (렌더와 동일 좌표)
+    # Smoothed coordinates and the quantities from them, the same coordinates
+    # the overlay renders
     df = load_smoothed(name, a.backbone)
     out_path = os.path.join(config.ROOT, "data", "outputs", name,
                             f"{name}_sidebyside{backbone_suffix(a.backbone)}.mp4")
@@ -75,7 +76,7 @@ def main():
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     total  = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
-    out_w = width + 600   # 영상 옆에 600px 그래프
+    out_w = width + 600   # 600 px of plots beside the video
     out = cv2.VideoWriter(out_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (out_w, height))
 
     frame_idx = 0
@@ -86,7 +87,7 @@ def main():
 
         draw_skeleton(frame, df, frame_idx)
 
-        # 그래프 이미지 생성 후 영상 옆에 붙이기
+        # render the plots and set them beside the frame
         graph_img = make_graph_frame(elbow, wrist_spd, hss, frame_idx,
                                      release, start, height)
         graph_img = cv2.resize(graph_img, (600, height))
@@ -95,11 +96,11 @@ def main():
 
         frame_idx += 1
         if frame_idx % 30 == 0:
-            print(f"  처리 중: {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
+            print(f"  {frame_idx}/{total} ({frame_idx/total*100:.0f}%)")
 
     cap.release()
     out.release()
-    print(f"완료! 출력: {out_path}")
+    print(f"done, written to {out_path}")
 
 
 if __name__ == "__main__":

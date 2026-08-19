@@ -1,8 +1,8 @@
-"""Figure (도 2, PATENT COPY of fig_camera_setup_3d): virtual camera setup over
+"""Figure (patent Fig. 2, PATENT COPY of fig_camera_setup_3d): virtual camera setup over
 azimuth x elevation around the pitcher. Each metric is trustworthy over a REGION
 of the dome (a valid zone), not a single point; the classic viewpoints remain as
 the optimal ANCHORS inside their zones. The shaded bands are schematic - the
-measured per-metric zones are the quantitative zone map (도 4 in the patent).
+measured per-metric zones are the quantitative zone map (patent Fig. 4 in the patent).
 3D quarter dome.
 
 This is a PATENT-ONLY copy so the paper figure (fig_camera_setup_3d.py) is left
@@ -132,7 +132,7 @@ def main():
 
     # per-metric usable ZONES (schematic bands) with the optimal viewpoint
     # ANCHOR inside each. Band extents are illustrative; the measured zones
-    # (15deg x 7-elevation, r2>=0.6) are the quantitative map (도 4).
+    # (15deg x 7-elevation, r2>=0.6) are the quantitative map (patent Fig. 4).
     # (az0,az1,el0,el1) per band. Deployment set = 15 metrics.
     for (az, el, col, name, off, zone) in [
         (0, 0, TEAL, "SIDE anchor\n(sagittal zone)", (0.05, -0.42, 0.02),

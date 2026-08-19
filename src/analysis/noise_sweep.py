@@ -1,10 +1,11 @@
 """
-Diamond - 노이즈 강건성: 측면(az=0)에서 키포인트 노이즈 vs Level-A r²
-noise_sweep.py
+Noise robustness: keypoint noise against Level-A r-squared, from the side.
 
-실제 폰 영상엔 MediaPipe 지터가 낀다. c3d 깔끔투영에 가우시안 노이즈(px)를
-더해, 신뢰 3종(+arm_slot) r²가 얼마나 버티는지 본다.
-노이즈는 body_scale(~142px @ppm=300) 대비 %로도 표기. 시드 여러 개 평균.
+A real phone recording carries pose jitter, which the clean projection has none
+of. Gaussian noise in pixels is added to the projected coordinates to see how far
+the three reliable quantities, and arm_slot, hold up. Noise is also reported as a
+percentage of body_scale, about 142 px at 300 pixels per metre, and each level is
+averaged over several seeds.
 """
 import os, sys
 import numpy as np
@@ -19,9 +20,9 @@ import metrics as M
 
 OBP_DATA = config.OBP_DATA_DIR
 AZ = 0
-NOISE_PX = [0, 1, 2, 4, 6, 8]      # body_scale~142px 대비 약 0~5.6%
+NOISE_PX = [0, 1, 2, 4, 6, 8]      # about 0 to 5.6 per cent of a body_scale near 142 px
 SEEDS = [0, 1, 2]
-BODY_SCALE_REF = 142.0             # 표기용 (% 환산)
+BODY_SCALE_REF = 142.0             # for reporting noise as a percentage
 
 MAP = {
     "lateral_trunk_tilt":  "torso_anterior_tilt_br",
@@ -60,10 +61,10 @@ def main():
                     pass
         done += 1
         if done % 100 == 0:
-            print(f"  ...{done} 처리")
-    print(f"처리 {done} / 실패 {fail}\n")
+            print(f"  ...{done} done")
+    print(f"done {done} / failed {fail}\n")
 
-    # noise 별 r² (시드 평균)
+    # r2 per noise level, averaged over seeds
     def r2_for(noise, ours, truth):
         vals = []
         for s in SEEDS:
@@ -79,7 +80,7 @@ def main():
                     vals.append(rr * rr)
         return np.mean(vals) if vals else np.nan
 
-    print("[측면(0°) 노이즈 강건성 — Level-A r² (시드 평균)]")
+    print("[side view (0 deg) noise robustness -- Level-A r2, averaged over seeds]")
     hdr = "noise".ljust(14) + "".join(f"{m[:10]:>12s}" for m in MAP)
     print(hdr); print("-" * len(hdr))
     rows = []

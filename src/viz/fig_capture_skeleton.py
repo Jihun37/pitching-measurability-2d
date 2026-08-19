@@ -1,4 +1,4 @@
-"""Figure (도6, left panel): a real bent-over release-pose skeleton on a
+"""Figure (patent Fig. 6, left panel): a real bent-over release-pose skeleton on a
 transparent background for the multi-view capture-geometry diagram. Reuses the
 OBP release pose and the fig_camera_setup_3d bone set; the TikZ figure overlays
 the three cameras, sightlines and occlusion on top of this PNG. Centered on the
