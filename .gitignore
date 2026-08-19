@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# the OpenBiomechanics download, which is not redistributed here
+data/datasets/
+
+# local matplotlib and figure output
+data/outputs/viz/

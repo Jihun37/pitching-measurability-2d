@@ -1,0 +1,82 @@
+column,column_class,pathway,evaluated,retained,best_ccc,best_r2,best_view
+session_pitch,metadata,,False,False,,,
+session,metadata,,False,False,,,
+p_throws,metadata,,False,False,,,
+pitch_type,metadata,,False,False,,,
+pitch_speed_mph,metadata,,False,False,,,
+max_shoulder_internal_rotational_velo,kinematic,max_shoulder_internal_rotational_velo,True,False,0.4173,0.1806,15/45
+max_elbow_extension_velo,kinematic,max_elbow_extension_velo,True,False,0.1916,0.126,0/15
+max_torso_rotational_velo,kinematic,max_torso_rotational_velo,True,False,0.6802,0.4709,30/75
+max_rotation_hip_shoulder_separation,kinematic,Hip-Shoulder Sep [O],True,True,0.7804,0.6526,90/75
+max_elbow_flexion,kinematic,max_elbow_flexion,True,True,0.8808,0.7801,270/45
+max_shoulder_external_rotation,kinematic,max_shoulder_external_rotation,True,False,0.2438,0.1594,285/15
+elbow_flexion_fp,kinematic,elbow_flexion_fp,True,True,0.8622,0.7585,345/30
+elbow_pronation_fp,kinematic,elbow_pronation_fp,True,False,0.2542,0.0973,315/0
+rotation_hip_shoulder_separation_fp,kinematic,rotation_hip_shoulder_separation_fp,True,True,0.7961,0.672,75/75
+shoulder_horizontal_abduction_fp,kinematic,shoulder_horizontal_abduction_fp,True,True,0.8724,0.7843,270/75
+shoulder_abduction_fp,kinematic,shoulder_abduction_fp,True,True,0.8606,0.745,150/0
+shoulder_external_rotation_fp,kinematic,shoulder_external_rotation_fp,True,False,0.4656,0.2258,225/45
+lead_knee_extension_angular_velo_fp,kinematic,lead_knee_extension_angular_velo_fp,True,True,0.791,0.6501,30/45
+lead_knee_extension_angular_velo_br,kinematic,lead_knee_extension_angular_velo_br,True,False,0.64,0.4154,225/15
+lead_knee_extension_angular_velo_max,kinematic,lead_knee_extension_angular_velo_max,True,True,0.8848,0.7947,180/15
+torso_anterior_tilt_fp,kinematic,torso_anterior_tilt_fp,True,True,0.8782,0.7906,90/30
+torso_lateral_tilt_fp,kinematic,torso_lateral_tilt_fp,True,True,0.7911,0.6416,15/15
+torso_rotation_fp,kinematic,torso_rotation_fp,True,True,0.7548,0.58,165/75
+pelvis_anterior_tilt_fp,kinematic,pelvis_anterior_tilt_fp,True,False,0.237,0.0633,270/0
+pelvis_lateral_tilt_fp,kinematic,pelvis_lateral_tilt_fp,True,True,0.8615,0.7668,210/0
+pelvis_rotation_fp,kinematic,pelvis_rotation_fp,True,True,0.8217,0.6801,285/75
+max_cog_velo_x,kinematic,COG Fwd Velo [O],True,True,0.8667,0.7593,0/0
+torso_rotation_min,kinematic,torso_rotation_min,True,False,0.1539,0.1202,210/15
+max_pelvis_rotational_velo,kinematic,Pelvis Rot Velo [O],True,True,0.9061,0.824,285/75
+glove_shoulder_horizontal_abduction_fp,kinematic,glove_shoulder_horizontal_abduction_fp,True,True,0.8574,0.7558,75/75
+glove_shoulder_abduction_fp,kinematic,glove_shoulder_abduction_fp,True,True,0.8735,0.7686,45/0
+glove_shoulder_external_rotation_fp,kinematic,glove_shoulder_external_rotation_fp,True,False,0.3653,0.1705,195/30
+glove_shoulder_abduction_mer,kinematic,glove_shoulder_abduction_mer,True,True,0.8999,0.8135,75/15
+elbow_flexion_mer,kinematic,elbow_flexion_mer,True,True,0.9383,0.8857,330/60
+torso_anterior_tilt_mer,kinematic,torso_anterior_tilt_mer,True,True,0.9069,0.832,15/15
+torso_lateral_tilt_mer,kinematic,torso_lateral_tilt_mer,True,True,0.9127,0.837,105/0
+torso_rotation_mer,kinematic,torso_rotation_mer,True,True,0.8891,0.7944,105/75
+elbow_varus_moment,kinetic,upper-bound inference protocol,False,False,,,
+shoulder_internal_rotation_moment,kinetic,upper-bound inference protocol,False,False,,,
+torso_anterior_tilt_br,kinematic,Trunk Tilt (ant) [O],True,True,0.9346,0.8815,30/0
+torso_lateral_tilt_br,kinematic,torso_lateral_tilt_br,True,True,0.7873,0.6273,105/30
+torso_rotation_br,kinematic,torso_rotation_br,True,True,0.892,0.801,150/85
+lead_knee_extension_from_fp_to_br,kinematic,lead_knee_extension_from_fp_to_br,True,True,0.8843,0.7994,45/45
+cog_velo_pkh,kinematic,COG Velo @PKH [O],True,True,0.9739,0.9495,0/0
+stride_length,kinematic,Stride (anchor) [O],True,True,0.9232,0.8551,0/0
+stride_angle,kinematic,Stride Angle [O],True,True,0.9903,0.9812,90/75
+arm_slot,kinematic,arm_slot,True,True,0.9885,0.9779,150/15
+timing_peak_torso_to_peak_pelvis_rot_velo,kinematic,timing_peak_torso_to_peak_pelvis_rot_velo,True,False,0.3046,0.1015,15/75
+max_shoulder_horizontal_abduction,kinematic,max_shoulder_horizontal_abduction,True,False,0.5562,0.3996,60/45
+shoulder_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+shoulder_generation_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+shoulder_absorption_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+elbow_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+elbow_generation_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+elbow_absorption_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_hip_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_hip_generation_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_hip_absorption_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_knee_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_knee_generation_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+lead_knee_absorption_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+rear_hip_transfer_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+rear_hip_generation_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+rear_hip_absorption_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+rear_knee_transfer_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+rear_knee_generation_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+rear_knee_absorption_pkh_fp,kinetic,upper-bound inference protocol,False,False,,,
+pelvis_lumbar_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+thorax_distal_transfer_fp_br,kinetic,upper-bound inference protocol,False,False,,,
+rear_grf_x_max,kinetic,upper-bound inference protocol,False,False,,,
+rear_grf_y_max,kinetic,upper-bound inference protocol,False,False,,,
+rear_grf_z_max,kinetic,upper-bound inference protocol,False,False,,,
+rear_grf_mag_max,kinetic,upper-bound inference protocol,False,False,,,
+rear_grf_angle_at_max,kinetic,upper-bound inference protocol,False,False,,,
+lead_grf_x_max,kinetic,upper-bound inference protocol,False,False,,,
+lead_grf_y_max,kinetic,upper-bound inference protocol,False,False,,,
+lead_grf_z_max,kinetic,upper-bound inference protocol,False,False,,,
+lead_grf_mag_max,kinetic,upper-bound inference protocol,False,False,,,
+lead_grf_angle_at_max,kinetic,upper-bound inference protocol,False,False,,,
+peak_rfd_rear,kinetic,upper-bound inference protocol,False,False,,,
+peak_rfd_lead,kinetic,upper-bound inference protocol,False,False,,,

@@ -1,0 +1,17 @@
+metric_id,cells,graded_fp100,graded_fp10,prefers_fp100,prefers_fp10,ties,delta
+rotation_hip_shoulder_separation_fp,39,39,0,39,0,0,39
+lead_knee_extension_from_fp_to_br,39,39,17,39,0,0,22
+pelvis_rotation_fp,68,68,57,68,0,0,11
+lead_knee_extension_angular_velo_max,34,34,23,27,7,0,11
+shoulder_horizontal_abduction_fp,39,39,29,39,0,0,10
+torso_rotation_fp,10,10,0,10,0,0,10
+glove_shoulder_abduction_fp,17,14,7,14,3,0,7
+torso_lateral_tilt_fp,19,17,11,12,7,0,6
+Stride Angle [O],148,148,143,146,2,0,5
+shoulder_abduction_fp,8,8,4,8,0,0,4
+max_elbow_flexion,5,4,1,4,1,0,3
+lead_knee_extension_angular_velo_fp,21,12,10,11,10,0,2
+pelvis_lateral_tilt_fp,5,4,5,2,3,0,-1
+torso_anterior_tilt_fp,64,57,60,15,49,0,-3
+elbow_flexion_fp,30,12,22,9,21,0,-10
+glove_shoulder_horizontal_abduction_fp,33,22,32,1,32,0,-10

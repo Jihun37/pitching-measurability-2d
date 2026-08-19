@@ -1,0 +1,198 @@
+metric_id,el,az_start,az_end,bins,degrees
+Stride Angle [O],0,75,105,3,45
+Stride Angle [O],0,255,285,3,45
+Stride Angle [O],15,180,135,22,330
+Stride Angle [O],30,0,345,24,360
+Stride Angle [O],45,0,345,24,360
+Stride Angle [O],60,0,345,24,360
+Stride Angle [O],75,0,345,24,360
+Stride Angle [O],85,0,345,24,360
+arm_slot,0,60,180,9,135
+arm_slot,0,240,0,9,135
+arm_slot,15,60,195,10,150
+arm_slot,15,240,345,8,120
+arm_slot,30,75,195,9,135
+arm_slot,30,240,330,7,105
+arm_slot,45,75,300,16,240
+arm_slot,60,75,210,10,150
+arm_slot,75,105,180,6,90
+COG Velo @PKH [O],0,135,210,6,90
+COG Velo @PKH [O],0,315,30,6,90
+COG Velo @PKH [O],15,135,210,6,90
+COG Velo @PKH [O],15,315,30,6,90
+COG Velo @PKH [O],30,135,210,6,90
+COG Velo @PKH [O],30,315,30,6,90
+COG Velo @PKH [O],45,135,210,6,90
+COG Velo @PKH [O],45,315,30,6,90
+COG Velo @PKH [O],60,135,210,6,90
+COG Velo @PKH [O],60,315,30,6,90
+COG Velo @PKH [O],75,135,210,6,90
+COG Velo @PKH [O],75,315,30,6,90
+COG Velo @PKH [O],85,135,210,6,90
+COG Velo @PKH [O],85,315,30,6,90
+elbow_flexion_mer,30,0,0,1,15
+elbow_flexion_mer,45,285,15,7,105
+elbow_flexion_mer,60,270,15,8,120
+elbow_flexion_mer,75,270,15,8,120
+Trunk Tilt (ant) [O],0,0,75,6,90
+Trunk Tilt (ant) [O],0,180,255,6,90
+Trunk Tilt (ant) [O],15,180,270,7,105
+Trunk Tilt (ant) [O],15,345,75,7,105
+Trunk Tilt (ant) [O],30,195,270,6,90
+Trunk Tilt (ant) [O],30,345,60,6,90
+Trunk Tilt (ant) [O],45,210,270,5,75
+Trunk Tilt (ant) [O],45,345,45,5,75
+Stride (anchor) [O],0,150,195,4,60
+Stride (anchor) [O],0,330,15,4,60
+Stride (anchor) [O],15,150,195,4,60
+Stride (anchor) [O],15,330,15,4,60
+Stride (anchor) [O],30,150,180,3,45
+Stride (anchor) [O],30,330,0,3,45
+Stride (anchor) [O],45,150,165,2,30
+Stride (anchor) [O],75,330,0,3,45
+Stride (anchor) [O],85,330,0,3,45
+torso_lateral_tilt_mer,0,75,135,5,75
+torso_lateral_tilt_mer,0,255,300,4,60
+torso_lateral_tilt_mer,15,60,120,5,75
+torso_lateral_tilt_mer,15,270,300,3,45
+torso_lateral_tilt_mer,30,60,120,5,75
+torso_lateral_tilt_mer,30,270,315,4,60
+torso_lateral_tilt_mer,45,45,120,6,90
+torso_lateral_tilt_mer,45,285,285,1,15
+torso_lateral_tilt_mer,60,30,120,7,105
+torso_lateral_tilt_mer,75,15,105,7,105
+torso_anterior_tilt_mer,0,165,240,6,90
+torso_anterior_tilt_mer,0,345,60,6,90
+torso_anterior_tilt_mer,15,180,240,5,75
+torso_anterior_tilt_mer,15,345,45,5,75
+torso_anterior_tilt_mer,30,180,255,6,90
+torso_anterior_tilt_mer,30,345,45,5,75
+torso_anterior_tilt_mer,45,195,270,6,90
+torso_anterior_tilt_mer,45,345,30,4,60
+torso_anterior_tilt_mer,60,210,270,5,75
+torso_anterior_tilt_mer,60,345,345,1,15
+Pelvis Rot Velo [O],60,150,195,4,60
+Pelvis Rot Velo [O],60,225,270,4,60
+Pelvis Rot Velo [O],60,300,45,8,120
+Pelvis Rot Velo [O],75,0,345,24,360
+Pelvis Rot Velo [O],85,0,345,24,360
+glove_shoulder_abduction_mer,0,60,90,3,45
+glove_shoulder_abduction_mer,0,240,270,3,45
+glove_shoulder_abduction_mer,15,45,90,4,60
+glove_shoulder_abduction_mer,15,240,255,2,30
+glove_shoulder_abduction_mer,30,45,90,4,60
+glove_shoulder_abduction_mer,45,45,75,3,45
+torso_rotation_br,30,60,60,1,15
+torso_rotation_br,45,60,90,3,45
+torso_rotation_br,60,75,225,11,165
+torso_rotation_br,75,75,315,17,255
+torso_rotation_br,85,75,315,17,255
+torso_rotation_mer,30,60,60,1,15
+torso_rotation_mer,45,60,105,4,60
+torso_rotation_mer,45,135,150,2,30
+torso_rotation_mer,60,75,165,7,105
+torso_rotation_mer,75,75,195,9,135
+torso_rotation_mer,85,75,315,17,255
+lead_knee_extension_angular_velo_max,0,165,210,4,60
+lead_knee_extension_angular_velo_max,0,345,30,4,60
+lead_knee_extension_angular_velo_max,15,0,45,4,60
+lead_knee_extension_angular_velo_max,15,150,210,5,75
+lead_knee_extension_angular_velo_max,30,0,45,4,60
+lead_knee_extension_angular_velo_max,30,135,210,6,90
+lead_knee_extension_angular_velo_max,45,30,45,2,30
+lead_knee_extension_angular_velo_max,45,135,195,5,75
+lead_knee_extension_from_fp_to_br,0,150,195,4,60
+lead_knee_extension_from_fp_to_br,0,330,15,4,60
+lead_knee_extension_from_fp_to_br,15,135,180,4,60
+lead_knee_extension_from_fp_to_br,15,330,30,5,75
+lead_knee_extension_from_fp_to_br,30,135,180,4,60
+lead_knee_extension_from_fp_to_br,30,345,45,5,75
+lead_knee_extension_from_fp_to_br,45,120,150,3,45
+lead_knee_extension_from_fp_to_br,45,345,60,6,90
+lead_knee_extension_from_fp_to_br,60,15,15,1,15
+lead_knee_extension_from_fp_to_br,60,45,45,1,15
+lead_knee_extension_from_fp_to_br,60,120,135,2,30
+max_elbow_flexion,45,255,300,4,60
+torso_anterior_tilt_fp,0,60,120,5,75
+torso_anterior_tilt_fp,0,240,300,5,75
+torso_anterior_tilt_fp,15,60,120,5,75
+torso_anterior_tilt_fp,15,240,300,5,75
+torso_anterior_tilt_fp,30,60,120,5,75
+torso_anterior_tilt_fp,30,240,300,5,75
+torso_anterior_tilt_fp,45,60,105,4,60
+torso_anterior_tilt_fp,45,240,315,6,90
+torso_anterior_tilt_fp,60,45,105,5,75
+torso_anterior_tilt_fp,60,240,315,6,90
+torso_anterior_tilt_fp,75,60,75,2,30
+torso_anterior_tilt_fp,75,255,300,4,60
+glove_shoulder_abduction_fp,0,30,75,4,60
+glove_shoulder_abduction_fp,0,210,255,4,60
+glove_shoulder_abduction_fp,15,30,75,4,60
+glove_shoulder_abduction_fp,15,210,225,2,30
+shoulder_horizontal_abduction_fp,30,60,75,2,30
+shoulder_horizontal_abduction_fp,45,60,90,3,45
+shoulder_horizontal_abduction_fp,60,75,105,3,45
+shoulder_horizontal_abduction_fp,60,225,255,3,45
+shoulder_horizontal_abduction_fp,75,75,270,14,210
+shoulder_horizontal_abduction_fp,85,75,270,14,210
+COG Fwd Velo [O],0,165,195,3,45
+COG Fwd Velo [O],0,345,15,3,45
+COG Fwd Velo [O],15,165,195,3,45
+COG Fwd Velo [O],15,345,15,3,45
+COG Fwd Velo [O],30,165,195,3,45
+COG Fwd Velo [O],30,345,15,3,45
+COG Fwd Velo [O],75,345,15,3,45
+COG Fwd Velo [O],85,345,15,3,45
+elbow_flexion_fp,15,345,345,1,15
+elbow_flexion_fp,30,330,15,4,60
+elbow_flexion_fp,45,330,15,4,60
+elbow_flexion_fp,60,330,0,3,45
+pelvis_lateral_tilt_fp,0,165,210,4,60
+shoulder_abduction_fp,0,135,165,3,45
+shoulder_abduction_fp,0,315,345,3,45
+shoulder_abduction_fp,15,150,165,2,30
+glove_shoulder_horizontal_abduction_fp,60,75,105,3,45
+glove_shoulder_horizontal_abduction_fp,60,315,315,1,15
+glove_shoulder_horizontal_abduction_fp,75,75,150,6,90
+glove_shoulder_horizontal_abduction_fp,75,300,315,2,30
+glove_shoulder_horizontal_abduction_fp,85,75,165,7,105
+glove_shoulder_horizontal_abduction_fp,85,285,315,3,45
+pelvis_rotation_fp,30,120,165,4,60
+pelvis_rotation_fp,30,270,270,1,15
+pelvis_rotation_fp,45,75,285,15,225
+pelvis_rotation_fp,60,75,300,16,240
+pelvis_rotation_fp,75,75,300,16,240
+pelvis_rotation_fp,85,75,300,16,240
+rotation_hip_shoulder_separation_fp,45,90,90,1,15
+rotation_hip_shoulder_separation_fp,60,60,105,4,60
+rotation_hip_shoulder_separation_fp,75,60,300,17,255
+rotation_hip_shoulder_separation_fp,85,60,300,17,255
+torso_lateral_tilt_fp,0,0,15,2,30
+torso_lateral_tilt_fp,0,180,195,2,30
+torso_lateral_tilt_fp,15,0,15,2,30
+torso_lateral_tilt_fp,15,180,195,2,30
+torso_lateral_tilt_fp,30,0,15,2,30
+torso_lateral_tilt_fp,30,180,195,2,30
+torso_lateral_tilt_fp,45,15,15,1,15
+torso_lateral_tilt_fp,45,180,195,2,30
+torso_lateral_tilt_fp,60,180,180,1,15
+torso_lateral_tilt_fp,75,180,180,1,15
+lead_knee_extension_angular_velo_fp,0,165,165,1,15
+lead_knee_extension_angular_velo_fp,0,345,345,1,15
+lead_knee_extension_angular_velo_fp,15,330,0,3,45
+lead_knee_extension_angular_velo_fp,30,0,30,3,45
+lead_knee_extension_angular_velo_fp,45,15,45,3,45
+lead_knee_extension_angular_velo_fp,45,120,120,1,15
+torso_lateral_tilt_br,0,105,120,2,30
+torso_lateral_tilt_br,0,285,300,2,30
+torso_lateral_tilt_br,15,105,120,2,30
+torso_lateral_tilt_br,15,285,300,2,30
+torso_lateral_tilt_br,30,90,120,3,45
+torso_lateral_tilt_br,45,90,120,3,45
+torso_lateral_tilt_br,60,75,120,4,60
+torso_lateral_tilt_br,75,60,105,4,60
+Hip-Shoulder Sep [O],60,60,105,4,60
+Hip-Shoulder Sep [O],75,15,180,12,180
+Hip-Shoulder Sep [O],85,0,345,24,360
+torso_rotation_fp,75,105,210,8,120
+torso_rotation_fp,85,150,165,2,30

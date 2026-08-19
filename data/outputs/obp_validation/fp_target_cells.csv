@@ -1,0 +1,580 @@
+metric,source,az,el,ccc_100,ccc_10,grade_100,grade_10,prefers
+Stride Angle [O],adopted,0,15,0.815231,0.77001,strong,moderate,fp_100
+Stride Angle [O],adopted,0,30,0.940977,0.929456,strong,strong,fp_100
+Stride Angle [O],adopted,0,45,0.972177,0.967349,strong,strong,fp_100
+Stride Angle [O],adopted,0,60,0.983785,0.979895,strong,strong,fp_100
+Stride Angle [O],adopted,0,75,0.988682,0.983864,strong,strong,fp_100
+Stride Angle [O],adopted,0,85,0.990005,0.983977,strong,strong,fp_100
+Stride Angle [O],adopted,15,15,0.796603,0.758305,moderate,moderate,fp_100
+Stride Angle [O],adopted,15,30,0.93981,0.929837,strong,strong,fp_100
+Stride Angle [O],adopted,15,45,0.972535,0.967978,strong,strong,fp_100
+Stride Angle [O],adopted,15,60,0.984142,0.980213,strong,strong,fp_100
+Stride Angle [O],adopted,15,75,0.988814,0.983934,strong,strong,fp_100
+Stride Angle [O],adopted,15,85,0.990027,0.983972,strong,strong,fp_100
+Stride Angle [O],adopted,30,15,0.796342,0.770976,moderate,moderate,fp_100
+Stride Angle [O],adopted,30,30,0.944565,0.937408,strong,strong,fp_100
+Stride Angle [O],adopted,30,45,0.975042,0.970934,strong,strong,fp_100
+Stride Angle [O],adopted,30,60,0.985245,0.981196,strong,strong,fp_100
+Stride Angle [O],adopted,30,75,0.98911,0.984063,strong,strong,fp_100
+Stride Angle [O],adopted,30,85,0.990069,0.983939,strong,strong,fp_100
+Stride Angle [O],adopted,45,15,0.819926,0.81157,strong,strong,fp_100
+Stride Angle [O],adopted,45,30,0.954732,0.950473,strong,strong,fp_100
+Stride Angle [O],adopted,45,45,0.979338,0.975474,strong,strong,fp_100
+Stride Angle [O],adopted,45,60,0.986878,0.982542,strong,strong,fp_100
+Stride Angle [O],adopted,45,75,0.9895,0.984177,strong,strong,fp_100
+Stride Angle [O],adopted,45,85,0.990122,0.983873,strong,strong,fp_100
+Stride Angle [O],adopted,60,15,0.865085,0.872689,strong,strong,fp_10
+Stride Angle [O],adopted,60,30,0.96849,0.965486,strong,strong,fp_100
+Stride Angle [O],adopted,60,45,0.984533,0.98032,strong,strong,fp_100
+Stride Angle [O],adopted,60,60,0.988619,0.983746,strong,strong,fp_100
+Stride Angle [O],adopted,60,75,0.989886,0.984171,strong,strong,fp_100
+Stride Angle [O],adopted,60,85,0.990176,0.983767,strong,strong,fp_100
+Stride Angle [O],adopted,75,0,0.831827,0.753168,strong,moderate,fp_100
+Stride Angle [O],adopted,75,15,0.919252,0.930191,strong,strong,fp_10
+Stride Angle [O],adopted,75,30,0.983679,0.979083,strong,strong,fp_100
+Stride Angle [O],adopted,75,45,0.988923,0.983652,strong,strong,fp_100
+Stride Angle [O],adopted,75,60,0.989903,0.984189,strong,strong,fp_100
+Stride Angle [O],adopted,75,75,0.990166,0.983941,strong,strong,fp_100
+Stride Angle [O],adopted,75,85,0.990219,0.98362,strong,strong,fp_100
+Stride Angle [O],adopted,90,0,0.963883,0.933627,strong,strong,fp_100
+Stride Angle [O],adopted,90,15,0.974348,0.968839,strong,strong,fp_100
+Stride Angle [O],adopted,90,30,0.988745,0.981622,strong,strong,fp_100
+Stride Angle [O],adopted,90,45,0.99,0.983,strong,strong,fp_100
+Stride Angle [O],adopted,90,60,0.990235,0.983333,strong,strong,fp_100
+Stride Angle [O],adopted,90,75,0.990266,0.983426,strong,strong,fp_100
+Stride Angle [O],adopted,90,85,0.990244,0.983434,strong,strong,fp_100
+Stride Angle [O],adopted,105,0,0.843938,0.742995,strong,limited,fp_100
+Stride Angle [O],adopted,105,15,0.902959,0.87563,strong,strong,fp_100
+Stride Angle [O],adopted,105,30,0.977278,0.964457,strong,strong,fp_100
+Stride Angle [O],adopted,105,45,0.98713,0.977266,strong,strong,fp_100
+Stride Angle [O],adopted,105,60,0.989517,0.981052,strong,strong,fp_100
+Stride Angle [O],adopted,105,75,0.990169,0.982638,strong,strong,fp_100
+Stride Angle [O],adopted,105,85,0.990249,0.98322,strong,strong,fp_100
+Stride Angle [O],adopted,120,15,0.833208,0.769603,strong,moderate,fp_100
+Stride Angle [O],adopted,120,30,0.963119,0.939223,strong,strong,fp_100
+Stride Angle [O],adopted,120,45,0.982426,0.968395,strong,strong,fp_100
+Stride Angle [O],adopted,120,60,0.988106,0.977787,strong,strong,fp_100
+Stride Angle [O],adopted,120,75,0.989923,0.981674,strong,strong,fp_100
+Stride Angle [O],adopted,120,85,0.990236,0.982997,strong,strong,fp_100
+Stride Angle [O],adopted,135,15,0.756882,0.680527,moderate,limited,fp_100
+Stride Angle [O],adopted,135,30,0.948981,0.914636,strong,strong,fp_100
+Stride Angle [O],adopted,135,45,0.977668,0.959216,strong,strong,fp_100
+Stride Angle [O],adopted,135,60,0.986523,0.974325,strong,strong,fp_100
+Stride Angle [O],adopted,135,75,0.989612,0.980692,strong,strong,fp_100
+Stride Angle [O],adopted,135,85,0.990213,0.982788,strong,strong,fp_100
+Stride Angle [O],adopted,150,30,0.937546,0.896353,strong,strong,fp_100
+Stride Angle [O],adopted,150,45,0.973891,0.951963,strong,strong,fp_100
+Stride Angle [O],adopted,150,60,0.985223,0.971466,strong,strong,fp_100
+Stride Angle [O],adopted,150,75,0.989334,0.979869,strong,strong,fp_100
+Stride Angle [O],adopted,150,85,0.990189,0.982619,strong,strong,fp_100
+Stride Angle [O],adopted,165,30,0.932562,0.888441,strong,strong,fp_100
+Stride Angle [O],adopted,165,45,0.971979,0.94817,strong,strong,fp_100
+Stride Angle [O],adopted,165,60,0.984524,0.969811,strong,strong,fp_100
+Stride Angle [O],adopted,165,75,0.989168,0.979355,strong,strong,fp_100
+Stride Angle [O],adopted,165,85,0.990172,0.98251,strong,strong,fp_100
+Stride Angle [O],adopted,180,15,0.752126,0.661301,moderate,limited,fp_100
+Stride Angle [O],adopted,180,30,0.935241,0.891848,strong,strong,fp_100
+Stride Angle [O],adopted,180,45,0.972405,0.948472,strong,strong,fp_100
+Stride Angle [O],adopted,180,60,0.98458,0.969649,strong,strong,fp_100
+Stride Angle [O],adopted,180,75,0.989155,0.979235,strong,strong,fp_100
+Stride Angle [O],adopted,180,85,0.990167,0.982476,strong,strong,fp_100
+Stride Angle [O],adopted,195,15,0.802566,0.71683,strong,limited,fp_100
+Stride Angle [O],adopted,195,30,0.944276,0.904806,strong,strong,fp_100
+Stride Angle [O],adopted,195,45,0.974981,0.952524,strong,strong,fp_100
+Stride Angle [O],adopted,195,60,0.985347,0.970931,strong,strong,fp_100
+Stride Angle [O],adopted,195,75,0.989292,0.979518,strong,strong,fp_100
+Stride Angle [O],adopted,195,85,0.990174,0.982519,strong,strong,fp_100
+Stride Angle [O],adopted,210,15,0.859946,0.787144,strong,moderate,fp_100
+Stride Angle [O],adopted,210,30,0.95686,0.923761,strong,strong,fp_100
+Stride Angle [O],adopted,210,45,0.978946,0.959198,strong,strong,fp_100
+Stride Angle [O],adopted,210,60,0.986605,0.973316,strong,strong,fp_100
+Stride Angle [O],adopted,210,75,0.989537,0.980137,strong,strong,fp_100
+Stride Angle [O],adopted,210,85,0.990191,0.982632,strong,strong,fp_100
+Stride Angle [O],adopted,225,15,0.913355,0.859688,strong,strong,fp_100
+Stride Angle [O],adopted,225,30,0.969718,0.944347,strong,strong,fp_100
+Stride Angle [O],adopted,225,45,0.983273,0.96696,strong,strong,fp_100
+Stride Angle [O],adopted,225,60,0.988024,0.976278,strong,strong,fp_100
+Stride Angle [O],adopted,225,75,0.989818,0.980972,strong,strong,fp_100
+Stride Angle [O],adopted,225,85,0.990209,0.9828,strong,strong,fp_100
+Stride Angle [O],adopted,240,15,0.952838,0.920266,strong,strong,fp_100
+Stride Angle [O],adopted,240,30,0.980209,0.962601,strong,strong,fp_100
+Stride Angle [O],adopted,240,45,0.987003,0.974296,strong,strong,fp_100
+Stride Angle [O],adopted,240,60,0.989249,0.979237,strong,strong,fp_100
+Stride Angle [O],adopted,240,75,0.990053,0.981875,strong,strong,fp_100
+Stride Angle [O],adopted,240,85,0.990221,0.983001,strong,strong,fp_100
+Stride Angle [O],adopted,255,0,0.831827,0.753168,strong,moderate,fp_100
+Stride Angle [O],adopted,255,15,0.975957,0.960963,strong,strong,fp_100
+Stride Angle [O],adopted,255,30,0.987292,0.976084,strong,strong,fp_100
+Stride Angle [O],adopted,255,45,0.989386,0.979946,strong,strong,fp_100
+Stride Angle [O],adopted,255,60,0.989974,0.981675,strong,strong,fp_100
+Stride Angle [O],adopted,255,75,0.990174,0.982708,strong,strong,fp_100
+Stride Angle [O],adopted,255,85,0.99022,0.983212,strong,strong,fp_100
+Stride Angle [O],adopted,270,0,0.963883,0.933627,strong,strong,fp_100
+Stride Angle [O],adopted,270,15,0.987739,0.97936,strong,strong,fp_100
+Stride Angle [O],adopted,270,30,0.989282,0.982227,strong,strong,fp_100
+Stride Angle [O],adopted,270,45,0.989766,0.98294,strong,strong,fp_100
+Stride Angle [O],adopted,270,60,0.990002,0.983227,strong,strong,fp_100
+Stride Angle [O],adopted,270,75,0.99014,0.983365,strong,strong,fp_100
+Stride Angle [O],adopted,270,85,0.990202,0.983413,strong,strong,fp_100
+Stride Angle [O],adopted,285,0,0.843938,0.742995,strong,limited,fp_100
+Stride Angle [O],adopted,285,15,0.969813,0.963739,strong,strong,fp_100
+Stride Angle [O],adopted,285,30,0.984403,0.979766,strong,strong,fp_100
+Stride Angle [O],adopted,285,45,0.987969,0.982983,strong,strong,fp_100
+Stride Angle [O],adopted,285,60,0.989315,0.983761,strong,strong,fp_100
+Stride Angle [O],adopted,285,75,0.98995,0.983792,strong,strong,fp_100
+Stride Angle [O],adopted,285,85,0.990167,0.983589,strong,strong,fp_100
+Stride Angle [O],adopted,300,15,0.948162,0.934967,strong,strong,fp_100
+Stride Angle [O],adopted,300,30,0.976227,0.971776,strong,strong,fp_100
+Stride Angle [O],adopted,300,45,0.98469,0.980656,strong,strong,fp_100
+Stride Angle [O],adopted,300,60,0.98809,0.983395,strong,strong,fp_100
+Stride Angle [O],adopted,300,75,0.98964,0.983994,strong,strong,fp_100
+Stride Angle [O],adopted,300,85,0.990121,0.983731,strong,strong,fp_100
+Stride Angle [O],adopted,315,15,0.918512,0.891461,strong,strong,fp_100
+Stride Angle [O],adopted,315,30,0.96668,0.960101,strong,strong,fp_100
+Stride Angle [O],adopted,315,45,0.980791,0.976854,strong,strong,fp_100
+Stride Angle [O],adopted,315,60,0.986619,0.982429,strong,strong,fp_100
+Stride Angle [O],adopted,315,75,0.989281,0.98402,strong,strong,fp_100
+Stride Angle [O],adopted,315,85,0.990072,0.983838,strong,strong,fp_100
+Stride Angle [O],adopted,330,15,0.882316,0.843354,strong,strong,fp_100
+Stride Angle [O],adopted,330,30,0.956409,0.947048,strong,strong,fp_100
+Stride Angle [O],adopted,330,45,0.976938,0.972611,strong,strong,fp_100
+Stride Angle [O],adopted,330,60,0.985219,0.981259,strong,strong,fp_100
+Stride Angle [O],adopted,330,75,0.988953,0.983954,strong,strong,fp_100
+Stride Angle [O],adopted,330,85,0.990031,0.983912,strong,strong,fp_100
+Stride Angle [O],adopted,345,15,0.845839,0.800418,strong,strong,fp_100
+Stride Angle [O],adopted,345,30,0.947124,0.935848,strong,strong,fp_100
+Stride Angle [O],adopted,345,45,0.973825,0.969095,strong,strong,fp_100
+Stride Angle [O],adopted,345,60,0.984192,0.980301,strong,strong,fp_100
+Stride Angle [O],adopted,345,75,0.988735,0.98388,strong,strong,fp_100
+Stride Angle [O],adopted,345,85,0.990007,0.983957,strong,strong,fp_100
+elbow_flexion_fp,screened,0,30,0.832945,0.609787,strong,limited,fp_100
+elbow_flexion_fp,screened,0,45,0.831862,0.735107,strong,limited,fp_100
+elbow_flexion_fp,screened,0,60,0.769542,0.824981,moderate,strong,fp_10
+elbow_flexion_fp,screened,0,75,0.715623,0.838619,limited,strong,fp_10
+elbow_flexion_fp,screened,0,85,0.660205,0.7749,limited,moderate,fp_10
+elbow_flexion_fp,screened,15,30,0.775711,0.573289,moderate,limited,fp_100
+elbow_flexion_fp,screened,15,45,0.782059,0.698517,moderate,limited,fp_100
+elbow_flexion_fp,screened,15,60,0.727798,0.785116,limited,moderate,fp_10
+elbow_flexion_fp,screened,15,75,0.694343,0.812942,limited,strong,fp_10
+elbow_flexion_fp,screened,15,85,0.667761,0.768833,limited,moderate,fp_10
+elbow_flexion_fp,screened,30,75,0.6664,0.778015,limited,moderate,fp_10
+elbow_flexion_fp,screened,30,85,0.658095,0.756554,limited,moderate,fp_10
+elbow_flexion_fp,screened,45,85,0.661283,0.751834,limited,moderate,fp_10
+elbow_flexion_fp,screened,300,60,0.486657,0.772747,limited,moderate,fp_10
+elbow_flexion_fp,screened,300,75,0.606935,0.792011,limited,moderate,fp_10
+elbow_flexion_fp,screened,300,85,0.659492,0.758103,limited,moderate,fp_10
+elbow_flexion_fp,screened,315,60,0.649802,0.830693,limited,strong,fp_10
+elbow_flexion_fp,screened,315,75,0.668065,0.846946,limited,strong,fp_10
+elbow_flexion_fp,screened,315,85,0.657568,0.77285,limited,moderate,fp_10
+elbow_flexion_fp,screened,330,30,0.83097,0.669473,strong,limited,fp_100
+elbow_flexion_fp,screened,330,45,0.837606,0.748246,strong,limited,fp_100
+elbow_flexion_fp,screened,330,60,0.784137,0.851954,moderate,strong,fp_10
+elbow_flexion_fp,screened,330,75,0.688848,0.852625,limited,strong,fp_10
+elbow_flexion_fp,screened,330,85,0.65609,0.776515,limited,moderate,fp_10
+elbow_flexion_fp,screened,345,15,0.75024,0.51219,moderate,limited,fp_100
+elbow_flexion_fp,screened,345,30,0.862188,0.625227,strong,limited,fp_100
+elbow_flexion_fp,screened,345,45,0.857509,0.751175,strong,moderate,fp_100
+elbow_flexion_fp,screened,345,60,0.800979,0.848779,strong,strong,fp_10
+elbow_flexion_fp,screened,345,75,0.715414,0.854597,limited,strong,fp_10
+elbow_flexion_fp,screened,345,85,0.656536,0.777284,limited,moderate,fp_10
+glove_shoulder_abduction_fp,screened,15,0,0.719248,0.769168,limited,moderate,fp_10
+glove_shoulder_abduction_fp,screened,30,0,0.835502,0.819675,strong,strong,fp_100
+glove_shoulder_abduction_fp,screened,30,15,0.77756,0.731745,moderate,limited,fp_100
+glove_shoulder_abduction_fp,screened,45,0,0.873508,0.812473,strong,strong,fp_100
+glove_shoulder_abduction_fp,screened,45,15,0.833356,0.722051,strong,limited,fp_100
+glove_shoulder_abduction_fp,screened,60,0,0.84925,0.711233,strong,limited,fp_100
+glove_shoulder_abduction_fp,screened,60,15,0.835859,0.634933,strong,limited,fp_100
+glove_shoulder_abduction_fp,screened,75,0,0.756123,0.587724,moderate,limited,fp_100
+glove_shoulder_abduction_fp,screened,75,15,0.756183,0.499975,moderate,limited,fp_100
+glove_shoulder_abduction_fp,screened,195,0,0.719248,0.769168,limited,moderate,fp_10
+glove_shoulder_abduction_fp,screened,195,15,0.731804,0.760435,limited,moderate,fp_10
+glove_shoulder_abduction_fp,screened,210,0,0.835502,0.819675,strong,strong,fp_100
+glove_shoulder_abduction_fp,screened,210,15,0.817622,0.749669,strong,limited,fp_100
+glove_shoulder_abduction_fp,screened,225,0,0.873508,0.812473,strong,strong,fp_100
+glove_shoulder_abduction_fp,screened,225,15,0.796151,0.700767,moderate,limited,fp_100
+glove_shoulder_abduction_fp,screened,240,0,0.84925,0.711233,strong,limited,fp_100
+glove_shoulder_abduction_fp,screened,255,0,0.756123,0.587724,moderate,limited,fp_100
+glove_shoulder_horizontal_abduction_fp,screened,60,45,0.713521,0.766532,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,75,45,0.685824,0.782766,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,75,60,0.79384,0.835794,moderate,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,75,75,0.857353,0.868285,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,75,85,0.856871,0.871266,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,90,45,0.632751,0.775924,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,90,60,0.773032,0.837026,moderate,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,90,75,0.848304,0.867503,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,90,85,0.852479,0.870556,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,105,45,0.584766,0.755529,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,105,60,0.754433,0.834636,moderate,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,105,75,0.840582,0.865902,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,105,85,0.847005,0.868918,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,120,60,0.744029,0.828236,limited,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,120,75,0.830902,0.862602,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,120,85,0.840727,0.866252,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,135,60,0.662654,0.803974,limited,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,135,75,0.816774,0.855095,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,135,85,0.833908,0.862526,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,150,75,0.795771,0.840624,moderate,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,150,85,0.826797,0.857854,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,165,85,0.819662,0.0195214,strong,limited,fp_100
+glove_shoulder_horizontal_abduction_fp,screened,255,75,-0.00613914,0.764801,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,270,75,0.709305,0.784969,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,270,85,0.0983114,0.841446,limited,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,285,75,0.73975,0.805401,limited,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,285,85,0.814545,0.845359,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,300,60,0.677048,0.763512,limited,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,300,75,0.775007,0.822313,moderate,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,300,85,0.823157,0.849635,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,315,60,0.764782,0.7805,moderate,moderate,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,315,75,0.809344,0.834534,strong,strong,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,315,85,0.832234,0.85387,strong,strong,fp_10
+lead_knee_extension_angular_velo_fp,screened,0,15,0.759618,0.699477,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,0,30,0.756579,0.718232,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,15,30,0.789623,0.69301,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,15,45,0.752237,0.722881,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,30,30,0.764731,0.648281,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,30,45,0.790997,0.716334,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,45,45,0.753105,0.685029,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,120,0,0.690947,0.75273,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,120,45,0.759621,0.435866,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,135,0,0.73297,0.777236,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,165,0,0.754091,0.709973,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,300,0,0.690947,0.75273,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,300,15,0.61543,0.758725,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,315,0,0.73297,0.777236,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,315,15,0.73905,0.767769,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,315,30,0.711244,0.761489,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,330,15,0.752508,0.759394,moderate,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,330,30,0.742602,0.774179,limited,moderate,fp_10
+lead_knee_extension_angular_velo_fp,screened,345,0,0.754091,0.709973,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,345,15,0.757141,0.736246,moderate,limited,fp_100
+lead_knee_extension_angular_velo_fp,screened,345,45,0.708143,0.765422,limited,moderate,fp_10
+lead_knee_extension_angular_velo_max,screened,0,0,0.858888,0.859743,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,0,15,0.8159,0.803125,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,0,30,0.752387,0.717888,moderate,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,15,0,0.884563,0.882703,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,15,15,0.864264,0.865149,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,15,30,0.818713,0.808889,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,30,0,0.859432,0.769681,strong,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,30,15,0.876076,0.860611,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,30,30,0.856642,0.853531,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,30,45,0.765997,0.759594,moderate,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,45,15,0.81305,0.521363,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,45,30,0.843751,0.667699,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,45,45,0.755881,0.733199,moderate,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,135,30,0.767237,0.762957,moderate,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,135,45,0.861086,0.67662,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,150,15,0.778272,0.766875,moderate,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,150,30,0.851711,0.85544,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,150,45,0.879533,0.834489,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,165,0,0.797994,0.784887,moderate,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,165,15,0.851039,0.852048,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,165,30,0.882665,0.89187,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,165,45,0.873245,0.57046,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,180,0,0.858888,0.859743,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,180,15,0.884836,0.890678,strong,strong,fp_10
+lead_knee_extension_angular_velo_max,screened,180,30,0.883443,0.77689,strong,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,180,45,0.834653,0.54745,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,195,0,0.884563,0.882703,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,195,15,0.880368,0.81261,strong,strong,fp_100
+lead_knee_extension_angular_velo_max,screened,195,30,0.847597,0.659117,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,195,45,0.782808,0.44957,moderate,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,210,0,0.859432,0.769681,strong,moderate,fp_100
+lead_knee_extension_angular_velo_max,screened,210,15,0.815681,0.609185,strong,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,210,30,0.765961,0.494811,moderate,limited,fp_100
+lead_knee_extension_angular_velo_max,screened,345,0,0.797994,0.784887,moderate,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,0,0,0.851331,0.720191,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,0,15,0.876174,0.75957,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,0,30,0.879015,0.77005,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,0,45,0.830143,0.749144,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,15,0,0.798194,0.668228,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,15,15,0.840922,0.70514,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,15,30,0.881301,0.777627,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,15,45,0.871082,0.77267,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,15,60,0.781611,0.70497,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,30,15,0.770137,0.637132,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,30,30,0.85389,0.727704,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,30,45,0.882165,0.799192,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,45,30,0.786767,0.636997,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,45,45,0.884288,0.797612,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,45,60,0.77545,0.744833,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,60,45,0.760507,0.647869,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,120,45,0.835106,0.753044,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,120,60,0.755396,0.519366,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,135,15,0.81104,0.742462,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,135,30,0.844066,0.751767,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,135,45,0.865697,0.756499,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,135,60,0.756556,0.506769,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,150,0,0.843092,0.757207,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,150,15,0.867613,0.759817,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,150,30,0.858724,0.751394,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,150,45,0.810076,0.659361,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,165,0,0.872929,0.756347,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,165,15,0.857322,0.726786,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,165,30,0.812953,0.670674,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,180,0,0.851331,0.720191,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,180,15,0.812547,0.679491,strong,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,180,30,0.757317,0.641418,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,195,0,0.798194,0.668228,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,330,0,0.843092,0.757207,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,330,15,0.793114,0.730267,moderate,limited,fp_100
+lead_knee_extension_from_fp_to_br,screened,345,0,0.872929,0.756347,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,345,15,0.868161,0.767721,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,345,30,0.838314,0.758987,strong,moderate,fp_100
+lead_knee_extension_from_fp_to_br,screened,345,45,0.757883,0.710466,moderate,limited,fp_100
+max_elbow_flexion,screened,255,45,0.860573,0.691555,strong,limited,fp_100
+max_elbow_flexion,screened,270,45,0.880845,0.700342,strong,limited,fp_100
+max_elbow_flexion,screened,270,60,0.733928,0.752604,limited,moderate,fp_10
+max_elbow_flexion,screened,285,45,0.806528,0.718886,strong,limited,fp_100
+max_elbow_flexion,screened,300,45,0.770642,0.743086,moderate,limited,fp_100
+pelvis_lateral_tilt_fp,screened,150,0,0.462237,0.751749,limited,moderate,fp_10
+pelvis_lateral_tilt_fp,screened,165,0,0.784084,0.839466,moderate,strong,fp_10
+pelvis_lateral_tilt_fp,screened,180,0,0.83851,0.856484,strong,strong,fp_10
+pelvis_lateral_tilt_fp,screened,195,0,0.85522,0.855212,strong,strong,fp_100
+pelvis_lateral_tilt_fp,screened,210,0,0.861495,0.844794,strong,strong,fp_100
+pelvis_rotation_fp,screened,75,45,0.768241,0.75581,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,75,60,0.795832,0.76956,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,75,75,0.811144,0.777804,strong,moderate,fp_100
+pelvis_rotation_fp,screened,75,85,0.817239,0.780901,strong,moderate,fp_100
+pelvis_rotation_fp,screened,90,45,0.779961,0.745949,moderate,limited,fp_100
+pelvis_rotation_fp,screened,90,60,0.800954,0.768672,strong,moderate,fp_100
+pelvis_rotation_fp,screened,90,75,0.81294,0.778635,strong,moderate,fp_100
+pelvis_rotation_fp,screened,90,85,0.817599,0.781258,strong,moderate,fp_100
+pelvis_rotation_fp,screened,105,45,0.777505,0.750861,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,105,60,0.804488,0.768505,strong,moderate,fp_100
+pelvis_rotation_fp,screened,105,75,0.81496,0.779712,strong,moderate,fp_100
+pelvis_rotation_fp,screened,105,85,0.818054,0.781645,strong,moderate,fp_100
+pelvis_rotation_fp,screened,120,30,0.760551,0.746391,moderate,limited,fp_100
+pelvis_rotation_fp,screened,120,45,0.781269,0.754162,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,120,60,0.807953,0.771289,strong,moderate,fp_100
+pelvis_rotation_fp,screened,120,75,0.81699,0.781025,strong,moderate,fp_100
+pelvis_rotation_fp,screened,120,85,0.818544,0.782037,strong,moderate,fp_100
+pelvis_rotation_fp,screened,135,30,0.777383,0.755061,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,135,45,0.791712,0.753168,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,135,60,0.813123,0.77664,strong,moderate,fp_100
+pelvis_rotation_fp,screened,135,75,0.818798,0.782369,strong,moderate,fp_100
+pelvis_rotation_fp,screened,135,85,0.819012,0.782399,strong,moderate,fp_100
+pelvis_rotation_fp,screened,150,30,0.790526,0.738892,moderate,limited,fp_100
+pelvis_rotation_fp,screened,150,45,0.803505,0.769583,strong,moderate,fp_100
+pelvis_rotation_fp,screened,150,60,0.818486,0.780762,strong,moderate,fp_100
+pelvis_rotation_fp,screened,150,75,0.82006,0.783377,strong,moderate,fp_100
+pelvis_rotation_fp,screened,150,85,0.819414,0.782698,strong,moderate,fp_100
+pelvis_rotation_fp,screened,165,30,0.776228,0.7089,moderate,limited,fp_100
+pelvis_rotation_fp,screened,165,45,0.811591,0.760609,strong,moderate,fp_100
+pelvis_rotation_fp,screened,165,60,0.81966,0.77977,strong,moderate,fp_100
+pelvis_rotation_fp,screened,165,75,0.820474,0.78377,strong,moderate,fp_100
+pelvis_rotation_fp,screened,165,85,0.819722,0.782911,strong,moderate,fp_100
+pelvis_rotation_fp,screened,180,45,0.79807,0.740155,moderate,limited,fp_100
+pelvis_rotation_fp,screened,180,60,0.814229,0.773985,strong,moderate,fp_100
+pelvis_rotation_fp,screened,180,75,0.820008,0.783576,strong,moderate,fp_100
+pelvis_rotation_fp,screened,180,85,0.819936,0.783026,strong,moderate,fp_100
+pelvis_rotation_fp,screened,195,45,0.764989,0.709844,moderate,limited,fp_100
+pelvis_rotation_fp,screened,195,60,0.804915,0.767819,strong,moderate,fp_100
+pelvis_rotation_fp,screened,195,75,0.819041,0.783116,strong,moderate,fp_100
+pelvis_rotation_fp,screened,195,85,0.820075,0.783043,strong,moderate,fp_100
+pelvis_rotation_fp,screened,210,45,0.755444,0.706756,moderate,limited,fp_100
+pelvis_rotation_fp,screened,210,60,0.797343,0.765744,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,210,75,0.81821,0.782748,strong,moderate,fp_100
+pelvis_rotation_fp,screened,210,85,0.820168,0.782969,strong,moderate,fp_100
+pelvis_rotation_fp,screened,225,45,0.753258,0.711743,moderate,limited,fp_100
+pelvis_rotation_fp,screened,225,60,0.795817,0.768858,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,225,75,0.818057,0.782575,strong,moderate,fp_100
+pelvis_rotation_fp,screened,225,85,0.820239,0.782812,strong,moderate,fp_100
+pelvis_rotation_fp,screened,240,45,0.758406,0.74129,moderate,limited,fp_100
+pelvis_rotation_fp,screened,240,60,0.800956,0.774126,strong,moderate,fp_100
+pelvis_rotation_fp,screened,240,75,0.818729,0.782376,strong,moderate,fp_100
+pelvis_rotation_fp,screened,240,85,0.820295,0.782576,strong,moderate,fp_100
+pelvis_rotation_fp,screened,255,45,0.776804,0.761138,moderate,moderate,fp_100
+pelvis_rotation_fp,screened,255,60,0.809697,0.776533,strong,moderate,fp_100
+pelvis_rotation_fp,screened,255,75,0.819919,0.781813,strong,moderate,fp_100
+pelvis_rotation_fp,screened,255,85,0.820321,0.782272,strong,moderate,fp_100
+pelvis_rotation_fp,screened,270,30,0.758195,0.702567,moderate,limited,fp_100
+pelvis_rotation_fp,screened,270,45,0.802068,0.752495,strong,moderate,fp_100
+pelvis_rotation_fp,screened,270,60,0.817295,0.773452,strong,moderate,fp_100
+pelvis_rotation_fp,screened,270,75,0.821073,0.78074,strong,moderate,fp_100
+pelvis_rotation_fp,screened,270,85,0.820284,0.781915,strong,moderate,fp_100
+pelvis_rotation_fp,screened,285,45,0.806505,0.742833,strong,limited,fp_100
+pelvis_rotation_fp,screened,285,60,0.820634,0.767353,strong,moderate,fp_100
+pelvis_rotation_fp,screened,285,75,0.821689,0.779351,strong,moderate,fp_100
+pelvis_rotation_fp,screened,285,85,0.820152,0.78153,strong,moderate,fp_100
+pelvis_rotation_fp,screened,300,60,0.820173,0.763072,strong,moderate,fp_100
+pelvis_rotation_fp,screened,300,75,0.821512,0.778032,strong,moderate,fp_100
+pelvis_rotation_fp,screened,300,85,0.819899,0.781148,strong,moderate,fp_100
+rotation_hip_shoulder_separation_fp,screened,60,60,0.777992,0.616228,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,60,75,0.794556,0.615489,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,60,85,0.792958,0.618836,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,75,60,0.787877,0.622341,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,75,75,0.796091,0.623358,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,75,85,0.7933,0.622669,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,90,45,0.756171,0.589868,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,90,60,0.784695,0.619809,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,90,75,0.794436,0.629561,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,90,85,0.793115,0.626259,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,105,60,0.762146,0.614156,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,105,75,0.789802,0.63497,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,105,85,0.792447,0.6295,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,120,75,0.783424,0.640457,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,120,85,0.791404,0.632295,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,135,75,0.777048,0.646354,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,135,85,0.790134,0.634527,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,150,75,0.778373,0.652127,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,150,85,0.78878,0.636052,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,165,75,0.780026,0.656526,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,165,85,0.787464,0.636708,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,180,75,0.781063,0.658169,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,180,85,0.786269,0.636342,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,195,75,0.780993,0.656134,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,195,85,0.78525,0.634858,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,210,75,0.779836,0.650116,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,210,85,0.784442,0.632243,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,225,75,0.777871,0.640188,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,225,85,0.783862,0.6286,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,240,75,0.775073,0.626579,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,240,85,0.783505,0.624152,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,255,75,0.770857,0.609922,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,255,85,0.783349,0.619239,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,270,75,0.764517,0.591762,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,270,85,0.783369,0.614295,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,285,75,0.76105,0.574651,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,285,85,0.783552,0.60979,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,300,75,0.759917,0.561418,moderate,limited,fp_100
+rotation_hip_shoulder_separation_fp,screened,300,85,0.783919,0.606167,moderate,limited,fp_100
+shoulder_abduction_fp,screened,135,0,0.835678,0.772846,strong,moderate,fp_100
+shoulder_abduction_fp,screened,150,0,0.860612,0.757261,strong,moderate,fp_100
+shoulder_abduction_fp,screened,150,15,0.789677,0.632054,moderate,limited,fp_100
+shoulder_abduction_fp,screened,165,0,0.812605,0.661323,strong,limited,fp_100
+shoulder_abduction_fp,screened,165,15,0.787455,0.538819,moderate,limited,fp_100
+shoulder_abduction_fp,screened,315,0,0.835678,0.772846,strong,moderate,fp_100
+shoulder_abduction_fp,screened,330,0,0.860612,0.757261,strong,moderate,fp_100
+shoulder_abduction_fp,screened,345,0,0.812605,0.661323,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,60,30,0.83702,0.703772,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,60,45,0.860078,0.752472,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,75,30,0.77312,0.637225,moderate,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,75,45,0.826564,0.731556,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,75,60,0.84892,0.76905,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,75,75,0.859609,0.784131,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,75,85,0.863285,0.785789,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,90,45,0.754664,0.687111,moderate,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,90,60,0.815474,0.754533,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,90,75,0.846739,0.782498,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,90,85,0.859504,0.786294,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,105,60,0.771226,0.73287,moderate,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,105,75,0.831825,0.77905,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,105,85,0.855694,0.786451,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,120,75,0.816705,0.774992,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,120,85,0.852206,0.786357,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,135,75,0.803609,0.771624,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,135,85,0.849412,0.786118,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,150,75,0.79467,0.769922,moderate,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,150,85,0.847641,0.78581,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,165,75,0.791437,0.770182,moderate,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,165,85,0.84712,0.785456,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,180,75,0.794543,0.771897,moderate,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,180,85,0.84793,0.785019,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,195,75,0.803598,0.773922,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,195,85,0.849991,0.784422,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,210,75,0.817283,0.774817,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,210,85,0.853064,0.783578,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,225,60,0.762382,0.727981,moderate,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,225,75,0.833507,0.773289,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,225,85,0.856797,0.78244,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,240,60,0.813034,0.720553,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,240,75,0.849649,0.768751,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,240,85,0.860785,0.781035,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,255,60,0.851214,0.171376,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,255,75,0.863145,0.761801,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,255,85,0.86464,0.77948,strong,moderate,fp_100
+shoulder_horizontal_abduction_fp,screened,270,75,0.872417,0.0734878,strong,limited,fp_100
+shoulder_horizontal_abduction_fp,screened,270,85,0.868058,0.108172,strong,limited,fp_100
+torso_anterior_tilt_fp,screened,45,60,0.762024,0.681737,moderate,limited,fp_100
+torso_anterior_tilt_fp,screened,60,0,0.803446,0.811245,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,60,15,0.811635,0.808793,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,60,30,0.820941,0.804374,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,60,45,0.832819,0.795195,strong,moderate,fp_100
+torso_anterior_tilt_fp,screened,60,60,0.84677,0.773551,strong,moderate,fp_100
+torso_anterior_tilt_fp,screened,60,75,0.768399,0.701602,moderate,limited,fp_100
+torso_anterior_tilt_fp,screened,75,0,0.858074,0.864752,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,75,15,0.864871,0.865171,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,75,30,0.871528,0.863521,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,75,45,0.877575,0.855487,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,75,60,0.875683,0.815042,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,75,75,0.779267,0.698621,moderate,limited,fp_100
+torso_anterior_tilt_fp,screened,90,0,0.873025,0.889528,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,90,15,0.876691,0.891632,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,90,30,0.878241,0.892252,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,90,45,0.874841,0.887908,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,90,60,0.851662,0.843616,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,105,0,0.866204,0.875648,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,105,15,0.861445,0.874121,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,105,30,0.85198,0.870202,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,105,45,0.832143,0.859928,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,105,60,0.779179,0.779485,moderate,moderate,fp_10
+torso_anterior_tilt_fp,screened,120,0,0.806191,0.811669,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,120,15,0.785914,0.795817,moderate,moderate,fp_10
+torso_anterior_tilt_fp,screened,120,30,0.757485,0.772023,moderate,moderate,fp_10
+torso_anterior_tilt_fp,screened,225,0,0.735382,0.758734,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,225,15,0.72756,0.762407,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,225,30,0.725164,0.768354,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,225,45,0.71737,0.765085,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,240,0,0.81041,0.829013,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,240,15,0.802886,0.829966,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,240,30,0.797708,0.831347,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,240,45,0.780729,0.820476,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,240,60,0.754729,0.809285,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,240,75,0.707059,0.790372,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,255,0,0.858074,0.873873,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,255,15,0.850658,0.872477,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,255,30,0.844288,0.871601,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,255,45,0.829331,0.856532,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,255,60,0.809022,0.845712,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,255,75,0.760996,0.815927,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,270,0,0.873044,0.891133,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,270,15,0.872397,0.889322,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,270,30,0.870978,0.890279,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,270,45,0.846824,0.876416,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,270,60,0.823256,0.862953,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,270,75,0.769901,0.829501,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,285,0,0.866204,0.875648,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,285,15,0.867922,0.875727,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,285,30,0.875505,0.879749,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,285,45,0.859418,0.876637,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,285,60,0.838672,0.861425,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,285,75,0.785078,0.83192,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,300,0,0.806191,0.811669,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,300,15,0.822181,0.823942,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,300,30,0.84258,0.834347,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,300,45,0.848145,0.843823,strong,strong,fp_100
+torso_anterior_tilt_fp,screened,300,60,0.834586,0.848466,strong,strong,fp_10
+torso_anterior_tilt_fp,screened,300,75,0.777496,0.8383,moderate,strong,fp_10
+torso_anterior_tilt_fp,screened,300,85,0.624576,0.759636,limited,moderate,fp_10
+torso_anterior_tilt_fp,screened,315,45,0.788382,0.749,moderate,limited,fp_100
+torso_anterior_tilt_fp,screened,315,60,0.799474,0.762204,moderate,moderate,fp_100
+torso_anterior_tilt_fp,screened,315,75,0.738778,0.792884,limited,moderate,fp_10
+torso_lateral_tilt_fp,screened,0,0,0.776814,0.783653,moderate,moderate,fp_10
+torso_lateral_tilt_fp,screened,0,15,0.782772,0.78974,moderate,moderate,fp_10
+torso_lateral_tilt_fp,screened,0,30,0.781787,0.795184,moderate,moderate,fp_10
+torso_lateral_tilt_fp,screened,0,45,0.734438,0.773484,limited,moderate,fp_10
+torso_lateral_tilt_fp,screened,15,0,0.787925,0.775167,moderate,moderate,fp_100
+torso_lateral_tilt_fp,screened,15,15,0.791122,0.784552,moderate,moderate,fp_100
+torso_lateral_tilt_fp,screened,15,30,0.777282,0.785014,moderate,moderate,fp_10
+torso_lateral_tilt_fp,screened,15,45,0.756131,0.780778,moderate,moderate,fp_10
+torso_lateral_tilt_fp,screened,15,60,0.694814,0.784598,limited,moderate,fp_10
+torso_lateral_tilt_fp,screened,180,0,0.76783,0.763485,moderate,moderate,fp_100
+torso_lateral_tilt_fp,screened,180,15,0.771182,0.755614,moderate,moderate,fp_100
+torso_lateral_tilt_fp,screened,180,30,0.773098,0.744224,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,180,45,0.773125,0.72646,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,180,60,0.77205,0.693092,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,180,75,0.750025,0.568137,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,195,0,0.763442,0.744402,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,195,15,0.761728,0.73081,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,195,30,0.758585,0.714459,moderate,limited,fp_100
+torso_lateral_tilt_fp,screened,195,45,0.752636,0.691565,moderate,limited,fp_100
+torso_rotation_fp,screened,105,75,0.751161,0.698812,moderate,limited,fp_100
+torso_rotation_fp,screened,120,75,0.752828,0.698789,moderate,limited,fp_100
+torso_rotation_fp,screened,135,75,0.753906,0.698362,moderate,limited,fp_100
+torso_rotation_fp,screened,150,75,0.754544,0.697837,moderate,limited,fp_100
+torso_rotation_fp,screened,150,85,0.750297,0.694209,moderate,limited,fp_100
+torso_rotation_fp,screened,165,75,0.754805,0.697241,moderate,limited,fp_100
+torso_rotation_fp,screened,165,85,0.750309,0.693825,moderate,limited,fp_100
+torso_rotation_fp,screened,180,75,0.754546,0.696299,moderate,limited,fp_100
+torso_rotation_fp,screened,195,75,0.753418,0.694578,moderate,limited,fp_100
+torso_rotation_fp,screened,210,75,0.751041,0.691734,moderate,limited,fp_100

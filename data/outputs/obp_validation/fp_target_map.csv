@@ -1,0 +1,29 @@
+metric,source,cells,strong_fp100,strong_fp10,d_strong,gate_fp100,gate_fp10,best_ccc_fp100,best_ccc_fp10,dccc_med,dccc_max,cells_up,cells_down,prefers
+pelvis_rotation_fp,screened,168,49,0,-49,68,57,0.821689,0.78377,-0.00825271,0.135533,0,59,fp_100
+shoulder_horizontal_abduction_fp,screened,168,32,0,-32,39,29,0.872417,0.786451,-0.019952,0.142192,0,36,fp_100
+lead_knee_extension_from_fp_to_br,screened,168,27,0,-27,39,17,0.884288,0.799192,-0.0423045,0.05289,0,39,fp_100
+lead_knee_extension_angular_velo_max,screened,168,25,15,-10,34,23,0.884836,0.89187,-0.0279175,0.147213,0,14,fp_100
+Stride Angle [O],adopted,168,144,136,-8,148,143,0.990266,0.984189,-0.0083275,0.010939,0,10,fp_100
+shoulder_abduction_fp,screened,168,6,0,-6,8,4,0.860612,0.772846,0.008992,0.219649,0,8,fp_100
+glove_shoulder_abduction_fp,screened,168,9,4,-5,14,7,0.873508,0.819675,-3.17e-05,0.141238,3,10,fp_100
+max_elbow_flexion,screened,168,3,0,-3,4,1,0.880845,0.752604,0.009274,0.0892212,1,4,fp_100
+max_elbow_extension_velo,screened,168,0,0,0,0,0,0.191585,0.191585,0,0.041172,0,0,tie
+max_shoulder_horizontal_abduction,screened,168,0,0,0,0,0,0.55616,0.558924,0,0.190574,0,0,tie
+elbow_pronation_fp,screened,168,0,0,0,0,0,0.254203,0.241988,0.000590589,0.0528814,0,0,tie
+lead_knee_extension_angular_velo_fp,screened,168,0,0,0,12,10,0.790997,0.777236,0.0516081,0.333185,9,11,tie
+max_shoulder_internal_rotational_velo,screened,168,0,0,0,0,0,0.417299,0.417299,0,0.0250547,0,0,tie
+glove_shoulder_external_rotation_fp,screened,168,0,0,0,0,0,0.365271,0.270327,-0.0649834,0.0541587,0,0,tie
+Release Ext [O],adopted,168,34,34,0,50,50,0.960281,0.960277,-6.7e-05,0.021469,0,0,tie
+COG Velo @PKH [O],adopted,168,84,84,0,84,84,0.973894,0.973894,0,0,0,0,tie
+torso_rotation_min,screened,168,0,0,0,0,0,0.153872,0.264424,0.0405407,0.20913,0,0,tie
+torso_rotation_fp,screened,168,0,0,0,10,0,0.754805,0.701718,-0.0380505,0.073145,0,10,tie
+max_torso_rotational_velo,screened,168,0,0,0,0,0,0.68021,0.680192,0,0.156813,0,0,tie
+pelvis_anterior_tilt_fp,screened,168,0,0,0,0,0,0.236956,0.127407,0.0370671,0.125478,0,0,tie
+shoulder_external_rotation_fp,screened,168,0,0,0,0,0,0.465554,0.335105,-0.0967023,0.084606,0,0,tie
+rotation_hip_shoulder_separation_fp,screened,168,0,0,0,39,0,0.796091,0.658169,-0.042266,0.037922,0,39,tie
+timing_peak_torso_to_peak_pelvis_rot_velo,screened,168,0,0,0,0,0,0.304595,0.326312,0.0149255,0.135252,0,0,tie
+torso_lateral_tilt_fp,screened,168,0,0,0,17,11,0.791122,0.795184,-0.0046705,0.200214,2,8,tie
+pelvis_lateral_tilt_fp,screened,168,3,4,1,4,5,0.861495,0.856484,0.000164605,0.289512,2,0,fp_10
+elbow_flexion_fp,screened,168,7,9,2,12,22,0.862188,0.854597,-0.0119445,0.321054,20,9,fp_10
+torso_anterior_tilt_fp,screened,168,42,47,5,57,60,0.878241,0.892252,0.0147395,0.363787,14,6,fp_10
+glove_shoulder_horizontal_abduction_fp,screened,168,16,24,8,22,32,0.857353,0.871266,0.0229377,0.77094,16,1,fp_10

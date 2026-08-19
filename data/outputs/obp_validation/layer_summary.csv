@@ -1,0 +1,43 @@
+metric,source,r2_cells,r2_reliable,metric_grade,map_cells,strong_cells,moderate_cells,strong_zone,hatch_cells,gate_cells,best_r2,best_r2_view,best_ccc,best_ccc_view,direct,calibrate,pass_weak,zone,zone_cells,spikes,adopted,pairs_with,pair_kind,colin,colin_with,old403_cells
+Stride Angle [O],adopted,148,132,strong-capable,148,144,4,az 0-345 @ el 30,0,148,0.9812,90/75,0.9903,90/75,0,148,0,az 0-345 @ el 30,24,0,True,,,,,-1
+arm_slot,screened,85,51,strong-capable,84,72,12,az 240-0 @ el 0,1,84,0.9779,150/15,0.9885,150/15,0,84,0,az 75-300 @ el 45,16,0,False,,,0.647,torso_lateral_tilt_mer,84
+COG Velo @PKH [O],adopted,84,54,strong-capable,84,84,0,az 315-30 @ el 0,0,84,0.9495,0/0,0.9739,0/0,18,65,1,az 315-30 @ el 0,6,0,True,,,,,-1
+pelvis_rotation_fp,screened,66,0,strong-capable,68,49,19,az 75-300 @ el 75,0,68,0.6801,270/75,0.8217,285/75,3,5,60,az 75-300 @ el 60,16,0,False,,,0.245,torso_rotation_br,0
+Pelvis Rot Velo [O],adopted,61,16,strong-capable,64,52,12,az 0-345 @ el 75,0,64,0.824,285/75,0.9061,285/75,49,10,5,az 0-345 @ el 75,24,0,True,,,,,-1
+torso_anterior_tilt_fp,screened,56,0,strong-capable,57,42,15,az 60-120 @ el 0,1,57,0.7906,90/30,0.8782,90/30,20,36,1,az 240-315 @ el 45,6,0,False,,,0.606,torso_lateral_tilt_mer,27
+torso_rotation_br,screened,48,4,strong-capable,49,39,10,az 75-315 @ el 85,0,49,0.801,135/85,0.892,150/85,2,7,40,az 75-315 @ el 75,17,0,False,,,1.0,torso_rotation_br,48
+torso_anterior_tilt_mer,screened,47,12,strong-capable,49,38,11,az 345-45 @ el 15,1,49,0.832,15/0,0.9069,15/15,3,36,10,az 345-60 @ el 0,6,0,False,,,0.936,torso_anterior_tilt_br,47
+Trunk Tilt (ant) [O],adopted,48,23,strong-capable,48,40,8,az 0-75 @ el 0,0,48,0.8815,30/0,0.9346,30/0,11,30,7,az 345-75 @ el 15,7,0,True,,,,,-1
+torso_lateral_tilt_mer,screened,46,13,strong-capable,47,37,10,az 30-105 @ el 60,1,47,0.837,105/15,0.9127,105/0,12,23,12,az 30-120 @ el 60,7,0,False,,,1.0,torso_lateral_tilt_mer,45
+Hip-Shoulder Sep [O],adopted,44,0,moderate-only,40,0,40,,4,40,0.6526,90/75,0.7804,90/75,0,11,29,az 0-345 @ el 85,24,0,True,,,,,-1
+torso_rotation_mer,screened,38,0,strong-capable,40,26,14,az 75-195 @ el 85,1,40,0.7944,105/75,0.8891,105/75,2,7,31,az 75-315 @ el 85,17,0,False,,,0.892,torso_rotation_br,37
+rotation_hip_shoulder_separation_fp,screened,40,0,moderate-only,39,0,39,,1,39,0.672,75/75,0.7961,75/75,0,39,0,az 60-300 @ el 75,17,0,False,,,0.91,max_rotation_hip_shoulder_separation,0
+shoulder_horizontal_abduction_fp,screened,39,0,strong-capable,39,32,7,az 75-270 @ el 85,0,39,0.7843,270/75,0.8724,270/75,0,39,0,az 75-270 @ el 75,14,0,False,,,0.361,torso_rotation_br,6
+lead_knee_extension_from_fp_to_br,screened,38,0,strong-capable,39,27,12,az 135-180 @ el 15,1,39,0.7994,45/45,0.8843,45/45,16,13,10,az 345-60 @ el 45,6,0,False,,,0.359,torso_anterior_tilt_br,26
+lead_knee_extension_angular_velo_max,screened,31,0,strong-capable,34,25,9,az 0-45 @ el 15,2,34,0.7947,150/45,0.8848,180/15,21,12,1,az 135-210 @ el 30,6,0,False,,,0.178,stride_length,30
+Stride (anchor) [O],adopted,29,7,strong-capable,30,20,10,az 330-0 @ el 0,0,30,0.8551,0/0,0.9232,0/0,3,27,0,az 330-15 @ el 0,4,0,True,,,,,-1
+COG Fwd Velo [O],adopted,25,0,strong-capable,24,18,6,az 345-15 @ el 0,1,24,0.7593,0/0,0.8667,0/0,0,24,0,az 345-15 @ el 0,3,0,True,,,,,-1
+elbow_flexion_mer,screened,24,6,strong-capable,24,20,4,az 285-15 @ el 45,1,24,0.8857,330/60,0.9383,330/60,13,6,5,az 270-15 @ el 60,8,0,False,,,1.0,elbow_flexion_mer,24
+glove_shoulder_horizontal_abduction_fp,screened,23,0,strong-capable,22,16,6,az 75-165 @ el 85,1,22,0.7558,75/75,0.8574,75/75,0,7,15,az 75-165 @ el 85,7,0,False,,,0.442,max_pelvis_rotational_velo,0
+torso_lateral_tilt_br,screened,15,0,moderate-only,22,0,22,,0,22,0.6273,105/30,0.7873,105/30,4,5,13,az 75-120 @ el 60,4,0,False,,,0.922,torso_lateral_tilt_mer,15
+glove_shoulder_abduction_mer,screened,16,1,strong-capable,19,10,9,az 60-90 @ el 15,1,19,0.8135,75/15,0.8999,75/15,2,7,10,az 45-90 @ el 15,4,0,False,,,1.0,glove_shoulder_abduction_mer,16
+torso_lateral_tilt_fp,screened,16,0,moderate-only,17,0,17,,0,17,0.6416,180/30,0.7911,15/15,3,11,3,az 0-15 @ el 0,2,0,False,,,0.505,torso_anterior_tilt_br,0
+glove_shoulder_abduction_fp,screened,12,0,strong-capable,14,9,5,az 30-60 @ el 0,0,14,0.7686,45/0,0.8735,45/0,0,1,13,az 30-75 @ el 0,4,0,False,,,0.378,glove_shoulder_abduction_mer,2
+elbow_flexion_fp,screened,13,0,strong-capable,12,7,5,az 330-0 @ el 30,1,12,0.7585,345/30,0.8622,345/30,7,5,0,az 330-15 @ el 30,4,0,False,,,0.288,elbow_flexion_mer,1
+lead_knee_extension_angular_velo_fp,screened,8,0,moderate-only,12,0,12,,1,12,0.6501,30/45,0.791,30/45,1,9,2,az 330-0 @ el 15,3,2,False,,,0.174,max_cog_velo_x,0
+torso_rotation_fp,screened,0,0,moderate-only,10,0,10,,0,10,0.58,225/60,0.7548,165/75,1,0,9,az 105-210 @ el 75,8,0,False,,,0.339,max_rotation_hip_shoulder_separation,0
+shoulder_abduction_fp,screened,8,0,strong-capable,8,6,2,az 135-165 @ el 0,0,8,0.745,150/0,0.8606,150/0,8,0,0,az 135-165 @ el 0,3,0,False,,,0.233,elbow_flexion_mer,5
+max_elbow_flexion,screened,5,0,strong-capable,4,3,1,az 255-285 @ el 45,1,4,0.7801,270/45,0.8808,270/45,0,4,0,az 255-300 @ el 45,4,0,False,,,0.534,elbow_flexion_mer,4
+pelvis_lateral_tilt_fp,screened,4,0,strong-capable,4,3,1,az 180-210 @ el 0,0,4,0.7668,210/0,0.8615,210/0,0,4,0,az 165-210 @ el 0,4,0,False,,,0.414,torso_lateral_tilt_mer,0
+elbow_pronation_fp,screened,0,0,below,0,0,0,,0,0,0.0973,315/0,0.2542,315/0,0,0,0,,0,0,False,,,0.104,max_pelvis_rotational_velo,0
+glove_shoulder_external_rotation_fp,screened,0,0,below,0,0,0,,0,0,0.1705,180/30,0.3653,195/30,0,0,0,,0,0,False,,,0.214,torso_anterior_tilt_br,0
+lead_knee_extension_angular_velo_br,screened,0,0,below,0,0,0,,0,0,0.4154,210/45,0.64,225/15,0,0,0,,0,0,False,,,0.19,stride_angle,0
+max_elbow_extension_velo,screened,0,0,below,0,0,0,,0,0,0.126,0/15,0.1916,0/15,0,0,0,,0,0,False,,,0.312,stride_angle,0
+max_shoulder_external_rotation,screened,0,0,below,0,0,0,,0,0,0.1594,285/15,0.2438,285/15,0,0,0,,0,0,False,,,0.471,torso_anterior_tilt_br,0
+max_shoulder_horizontal_abduction,screened,0,0,below,0,0,0,,0,0,0.3996,60/45,0.5562,60/45,0,0,0,,0,0,False,,,0.3,torso_rotation_br,0
+max_shoulder_internal_rotational_velo,screened,0,0,below,0,0,0,,0,0,0.1806,15/45,0.4173,15/45,0,0,0,,0,0,False,,,0.235,max_rotation_hip_shoulder_separation,0
+max_torso_rotational_velo,screened,0,0,below,0,0,0,,0,0,0.4709,30/75,0.6802,30/75,0,0,0,,0,0,False,,,0.459,max_pelvis_rotational_velo,0
+pelvis_anterior_tilt_fp,screened,0,0,below,0,0,0,,0,0,0.0633,75/0,0.237,270/0,0,0,0,,0,0,False,,,0.302,stride_length,0
+shoulder_external_rotation_fp,screened,0,0,below,0,0,0,,0,0,0.2258,195/60,0.4656,225/45,0,0,0,,0,0,False,,,0.275,max_rotation_hip_shoulder_separation,0
+timing_peak_torso_to_peak_pelvis_rot_velo,screened,0,0,below,0,0,0,,0,0,0.1015,15/75,0.3046,15/75,0,0,0,,0,0,False,,,0.222,max_rotation_hip_shoulder_separation,0
+torso_rotation_min,screened,0,0,below,0,0,0,,0,0,0.1202,210/15,0.1539,210/15,0,0,0,,0,0,False,,,0.23,torso_rotation_br,0
