@@ -7,6 +7,8 @@ swept over 24 azimuths and 7 elevations, giving 168 viewpoints. At every viewpoi
 estimator measures a quantity and is scored against that pitch's own 3D ground truth.
 The result is a graded measurability map over (quantity × viewpoint).
 
+![The 168 swept viewpoints, and what one view determines about its own azimuth](figures/fig_camera_geometry.png)
+
 ## What is here, and what is not
 
 Included: the projection, the estimators, the grading protocol, the scripts that produce
@@ -94,6 +96,11 @@ Figures 7 and 8 read the author's video recordings, which are not included, so t
 cannot be regenerated from this release. The published PNGs are under `figures/`.
 
 ## The accounting
+
+![The graded measurability map, one panel per retained row](figures/fig_graded_map.png)
+
+One panel per retained row, agreement over azimuth and elevation, with the two
+grade contours drawn on the field rather than a single pass line.
 
 ```
 81 point-of-interest columns = 5 metadata + 34 kinetic + 42 kinematic
