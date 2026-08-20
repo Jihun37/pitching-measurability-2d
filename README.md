@@ -26,7 +26,7 @@ paper rest entirely on the marker trajectories.
 
 ## Getting the data
 
-1. Download the OpenBiomechanics Project from <https://www.openbiomechanics.org/>.
+1. Download the OpenBiomechanics Project from <https://openbiomechanics.org/>.
 2. Place it so that the following resolves:
    `<root>/data/datasets/OBP/openbiomechanics/baseball_pitching/data`
 3. Set `DIAMOND_ROOT` if the tree is not where `src/config.py` sits, and confirm the

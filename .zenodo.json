@@ -28,7 +28,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://www.openbiomechanics.org/",
+      "identifier": "https://openbiomechanics.org/",
       "relation": "isDerivedFrom",
       "scheme": "url"
     }
